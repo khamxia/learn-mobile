@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => HomeLogic())  ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Learn App',
         theme: ThemeData(
           useMaterial3: true,
