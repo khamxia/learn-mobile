@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/pages/register/register_page.dart';
 
 import '../../constants/app_color.dart';
+import '../../constants/app_image.dart';
 import '../../widgets/my_text_style.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,6 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   // bool _isShowPassword = false;
   bool isShowpassword = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Image.asset(AppImage.logo,width: 100,height: 100,),
                 Center(
                   child: Text("Welcome Back", style: myTextStyle(fontSize: 20)),
                 ),
