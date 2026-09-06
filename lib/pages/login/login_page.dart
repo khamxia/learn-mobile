@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:learn_app/constants/app_image.dart';
+import 'package:learn_app/pages/login/provider/login_logic.dart';
 import 'package:learn_app/pages/register/register_page.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/app_color.dart';
 import '../../widgets/my_text_style.dart';
@@ -16,10 +19,17 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   // bool _isShowPassword = false;
-  bool isShowpassword = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    print('build UI');
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       behavior: HitTestBehavior.opaque,
@@ -31,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Image.asset(AppImage.logo, width: 100, height: 100),
                 Center(
                   child: Text(
                     "ຍິນດີຕ້ອນຮັບ",
@@ -92,53 +103,65 @@ class _LoginPageState extends State<LoginPage> {
                   style: myTextStyle(fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 5),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: isShowpassword,
-                  keyboardType: TextInputType.emailAddress,
-                  cursorColor: AppColors.primaryColor,
-                  decoration: InputDecoration(
-                    hintText: 'ປ້ອນລະຫັດຜ່ານ',
-                    prefixIcon: Icon(Icons.lock_clock_sharp),
-                    suffixIcon: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          isShowpassword = !(isShowpassword);
-                          // if (_isShowPassword == true) {
-                          //   _isShowPassword = false;
-                          // } else {
-                          //   _isShowPassword = true;
-                          // }
-                          print('Show password $isShowpassword');
-                        });
+                Consumer<LoginLogic>(
+                  builder: (context, loginState, child) {
+                    final state = loginState.loginState;
+                    print('status ==>${state.loginStatus}');
+                    print('isPassword => ${state.isShowpassword}');
+                    return TextFormField(
+                      controller: _passwordController,
+                      obscureText: state.isShowpassword,
+                      keyboardType: TextInputType.emailAddress,
+                      cursorColor: AppColors.primaryColor,
+                      decoration: InputDecoration(
+                        hintText: 'ປ້ອນລະຫັດຜ່ານ',
+                        prefixIcon: Icon(Icons.lock_clock_sharp),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            // setState(() {
+                            //   isShowpassword = !(isShowpassword);
+                            //   // if (_isShowPassword == true) {
+                            //   //   _isShowPassword = false;
+                            //   // } else {
+                            //   //   _isShowPassword = true;
+                            //   // }
+                            //   print('Show password $isShowpassword');
+                            // });
+                            loginState.changePassword(
+                              isShowPassword: state.isShowpassword
+                                  ? false
+                                  : true,
+                            );
+                          },
+                          child: Icon(
+                            // isShowpassword ? Icons.visibility : Icons.visibility_off,
+                            state.isShowpassword == true
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.textColor,
+                            width: 0.5,
+                          ),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.primaryColor,
+                            width: 0.5,
+                          ),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'ກະລຸນາປ້ອນລະຫັດຜ່ານ';
+                        }
+                        return null;
                       },
-                      child: Icon(
-                        // isShowpassword ? Icons.visibility : Icons.visibility_off,
-                        isShowpassword == true
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.textColor,
-                        width: 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.primaryColor,
-                        width: 0.5,
-                      ),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'ກະລຸນາປ້ອນລະຫັດຜ່ານ';
-                    }
-                    return null;
+                    );
                   },
                 ),
                 SizedBox(height: 10),
