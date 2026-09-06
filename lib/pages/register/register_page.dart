@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_app/widgets/my_text_style.dart';
 
 import '../../constants/app_color.dart';
 
@@ -26,35 +27,78 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Welcome Back"),
-            Text("create your account"),
+             Center(
+                  child: Text("Welcome Back", style: myTextStyle(fontSize: 20)),
+                ),
+                 Center(
+                  child: Text("create your account", style: myTextStyle(fontSize: 20)),
+                ),
+            // Text("Welcome Back"),
+            // Text("create your account"),
             SizedBox(height: 20),
+            Text(
+                  'ຊື່ຜູ້ໃຊ້',
+                  style: myTextStyle(fontWeight: FontWeight.w600),
+                ),
             TextFormField(
               controller: _usernameController,
               decoration: InputDecoration(
-                labelText: 'username',
-                border: OutlineInputBorder(),
+                hintText: 'username',
+                prefixIcon: Icon(Icons.person_outline),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.textColor),
+                      borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
             SizedBox(height: 10),
+             Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
+                SizedBox(height: 5),
             TextFormField(
               controller: _emailController,
               decoration: InputDecoration(
-                labelText: 'email',
-                border: OutlineInputBorder(),
+                hintText: 'email',
+                prefixIcon: Icon(Icons.email_outlined),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.textColor),
+                      borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
             SizedBox(height: 10),
+            Text(
+                  'ລະຫັດຜ່ານ',
+                  style: myTextStyle(fontWeight: FontWeight.w600),
+                ),
             TextFormField(
               controller: _passwordController,
               decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
+                hintText: 'Password',
+                prefixIcon: Icon(Icons.lock_outline),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: AppColors.textColor),
+                      borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
+    
+                SizedBox(height: 20),
+                Center(
+                  
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle registration logic here
+                      backgroundColor: AppColors.primaryColor;
+                    },
+                    child: Text('Register', style: TextStyle()),
+                  ),
+                ),
+            
           ],
         ),
+        
       ),
     );
   }

@@ -98,8 +98,8 @@ class _LoginPageState extends State<LoginPage> {
                       child: Icon(
                         // isShowpassword ? Icons.visibility : Icons.visibility_off,
                         isShowpassword == true
-                            ? Icons.visibility
-                            : Icons.visibility_off,
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                       ),
                     ),
                     border: OutlineInputBorder(
