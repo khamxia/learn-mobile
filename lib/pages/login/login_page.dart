@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   // bool _isShowPassword = false;
   bool isShowpassword = false;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,16 +32,25 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Text("Welcome Back", style: myTextStyle(fontSize: 20)),
+                  child: Text(
+                    "ຍິນດີຕ້ອນຮັບ",
+                    style: myTextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Center(
                   child: Text(
-                    "i am learning flutter",
-                    style: myTextStyle(fontSize: 14),
+                    "ຂ້ອຍກຳລັງຮຽນ Flutter",
+                    style: myTextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 40),
                 Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
                 SizedBox(height: 5),
                 TextFormField(
@@ -51,12 +61,19 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'ປ້ອນອີເມວ',
                     prefixIcon: Icon(Icons.email_outlined),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.textColor,
+                        width: 0.5,
+                      ),
+
+                      borderRadius: BorderRadius.circular(14),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                   ),
                   validator: (value) {
@@ -103,12 +120,18 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.textColor,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                   ),
                   validator: (value) {
@@ -119,8 +142,14 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [Text('ລືມລະຫັດຜ່ານ?', style: myTextStyle())],
+                ),
+                SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
+                  height: 50,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,
@@ -140,15 +169,19 @@ class _LoginPageState extends State<LoginPage> {
                         print('ມີຂໍ້ມູນເເລ້ວ');
                       }
                     },
-                    child: Text("Login", style: TextStyle()),
+                    child: Text(
+                      "ເຂົ້າສູ່ລະບົບ",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
+                SizedBox(height: 20),
                 Divider(color: AppColors.grayColor),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Don\'t have an account?'),
+                    Text('ຍັງບໍ່ມີບັນຊີ? ', style: myTextStyle()),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -165,12 +198,16 @@ class _LoginPageState extends State<LoginPage> {
                         // );
                       },
                       child: Text(
-                        'Sign Up',
-                        style: myTextStyle(color: AppColors.primaryColor),
+                        'ລົງທະບຽນ',
+                        style: myTextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
                 ),
+                // TextButton.icon(onPressed: onPressed, label: label,icon: ,)
               ],
             ),
           ),
