@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
 
 import '../../constants/app_color.dart';
+import '../../widgets/my_text_field.dart';
+import '../../widgets/my_text_style.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -19,9 +21,15 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
+        iconTheme: const IconThemeData(color: Colors.white),
+        centerTitle: true,
         title: const Text(
-          "Register Page",
-          style: TextStyle(color: Colors.white),
+          "ລົງທະບຽນ",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Padding(
@@ -29,72 +37,63 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Center(
-                  child: Text("Welcome Back", style: myTextStyle(fontSize: 20)),
-                ),
-                 Center(
-                  child: Text("create your account", style: myTextStyle(fontSize: 20)),
-                ),
-            // Text("Welcome Back"),
-            // Text("create your account"),
+            Center(
+              child: Text(
+                "ລົງທະບຽນ",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 10),
+            Center(
+              child: Text(
+                "ສ້າງບັນຊີຂອງທ່ານ",
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ),
             SizedBox(height: 20),
-            Text(
-                  'ຊື່ຜູ້ໃຊ້',
-                  style: myTextStyle(fontWeight: FontWeight.w600),
-                ),
-            TextFormField(
+            Text('ຊື່ຜູ້ໃຊ້', style: myTextStyle(fontWeight: FontWeight.w600)),
+            SizedBox(height: 5),
+            MyTextField(
               controller: _usernameController,
-              decoration: InputDecoration(
-                hintText: 'username',
-                prefixIcon: Icon(Icons.person_outline),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.textColor),
-                      borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+              hintText: 'ປ້ອນຊື່ຜູ້ໃຊ້',
+              prefixIcon: Icons.person,
             ),
             SizedBox(height: 10),
-             Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
-                SizedBox(height: 5),
-            TextFormField(
+            Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
+            SizedBox(height: 5),
+            MyTextField(
               controller: _emailController,
-              decoration: InputDecoration(
-                hintText: 'email',
-                prefixIcon: Icon(Icons.email_outlined),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.textColor),
-                      borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+              hintText: 'ປ້ອນອີເມວ',
+              prefixIcon: Icons.email,
             ),
             SizedBox(height: 10),
-            Text(
-                  'ລະຫັດຜ່ານ',
-                  style: myTextStyle(fontWeight: FontWeight.w600),
-                ),
-            TextFormField(
+            Text('ລະຫັດຜ່ານ', style: myTextStyle(fontWeight: FontWeight.w600)),
+            SizedBox(height: 5),
+            MyTextField(
               controller: _passwordController,
-              decoration: InputDecoration(
-                hintText: 'Password',
-                prefixIcon: Icon(Icons.lock_outline),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: AppColors.textColor),
-                      borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+              hintText: 'ປ້ອນລະຫັດຜ່ານ',
+              prefixIcon: Icons.lock,
+              obscureText: true,
             ),
-    
-                SizedBox(height: 20),
-                Center(
-                  
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Handle registration logic here
-                      backgroundColor: AppColors.primaryColor;
-                    },
-                    child: Text('Register', style: TextStyle()),
+            SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: AppColors.primaryColor,
+                  foregroundColor: AppColors.whiteColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
                 ),
+                onPressed: () {},
+                child: Text(
+                  "ລົງທະບຽນ",
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
             
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/pages/register/register_page.dart';
 
 import '../../constants/app_color.dart';
+import '../../constants/app_image.dart';
 import '../../widgets/my_text_style.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,6 +18,14 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   // bool _isShowPassword = false;
   bool isShowpassword = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -31,16 +40,33 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
-                  child: Text("Welcome Back", style: myTextStyle(fontSize: 20)),
+                  child: Image.asset(
+                    AppImage.logo,//ເອີ້ນຈາກຄຮາສທີ້ເຮົາໄດ້ສ້າງໄວ້ຢູ່ຄອນເທັນ ແອບອິເມກ ນີ້ຄືສັ້ນ
+                    // or 'assets/flutter_1.jpeg',ນີ້ຄືຍາວ
+                    width: 100,
+                    height: 100,
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    "ຍິນດີຕ້ອນຮັບ",
+                    style: myTextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
                 SizedBox(height: 10),
                 Center(
                   child: Text(
-                    "i am learning flutter",
-                    style: myTextStyle(fontSize: 14),
+                    "ຂ້ອຍກຳລັງຮຽນ Flutter",
+                    style: myTextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 40),
                 Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
                 SizedBox(height: 5),
                 TextFormField(
@@ -51,12 +77,19 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'ປ້ອນອີເມວ',
                     prefixIcon: Icon(Icons.email_outlined),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.textColor,
+                        width: 0.5,
+                      ),
+
+                      borderRadius: BorderRadius.circular(14),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                   ),
                   validator: (value) {
@@ -103,12 +136,18 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     border: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.textColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.textColor,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: AppColors.primaryColor),
-                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide(
+                        color: AppColors.primaryColor,
+                        width: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                   ),
                   validator: (value) {
@@ -119,8 +158,14 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
                 SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [Text('ລືມລະຫັດຜ່ານ?', style: myTextStyle())],
+                ),
+                SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
+                  height: 50,
                   child: TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,
@@ -140,15 +185,19 @@ class _LoginPageState extends State<LoginPage> {
                         print('ມີຂໍ້ມູນເເລ້ວ');
                       }
                     },
-                    child: Text("Login", style: TextStyle()),
+                    child: Text(
+                      "ເຂົ້າສູ່ລະບົບ",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
+                SizedBox(height: 20),
                 Divider(color: AppColors.grayColor),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Don\'t have an account?'),
+                    Text('ຍັງບໍ່ມີບັນຊີ? ', style: myTextStyle()),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -165,12 +214,16 @@ class _LoginPageState extends State<LoginPage> {
                         // );
                       },
                       child: Text(
-                        'Sign Up',
-                        style: myTextStyle(color: AppColors.primaryColor),
+                        'ລົງທະບຽນ',
+                        style: myTextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
                 ),
+                // TextButton.icon(onPressed: onPressed, label: label,icon: ,)
               ],
             ),
           ),
