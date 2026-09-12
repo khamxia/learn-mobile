@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/pages/login/login_page.dart';
 import 'package:learn_app/pages/login/provider/login_logic.dart';
+import 'package:learn_app/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           colorScheme: .fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: LoginPage(),
+        home: const HomeScreen(),
       ),
     );
   }
