@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_image.dart';
+import 'package:learn_app/pages/dashboard/dashboard_page.dart';
 import 'package:learn_app/pages/login/provider/login_logic.dart';
 import 'package:learn_app/pages/register/register_page.dart';
 import 'package:provider/provider.dart';
@@ -195,6 +196,13 @@ class _LoginPageState extends State<LoginPage> {
                         //   }
                         if (_formKey.currentState!.validate()) {
                           print('ມີຂໍ້ມູນເເລ້ວ');
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DashboardPage(),
+                            ),
+                            (route) => false,
+                          );
                         }
                       },
                       child: Text(
