@@ -211,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text(
                         "ເຂົ້າສູ່ລະບົບ",
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: myTextStyle(fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),

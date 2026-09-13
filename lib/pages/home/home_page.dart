@@ -1,14 +1,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
+import 'package:learn_app/constants/app_image.dart';
+import 'package:learn_app/constants/data_demo.dart';
+import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/app_image.dart';
 import '../../constants/data_demo.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +34,7 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(shape: BoxShape.circle),
                   child: Image.asset(AppImage.logo),
                 ),
-                SizedBox(width: 10,),
+                SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [Text('First name'), Text('ສະບາຍດີ...')],
@@ -35,8 +44,8 @@ class HomePage extends StatelessWidget {
                 IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag)),
               ],
             ),
-            SizedBox(height: 10,),
             // ສະເເດງ slide ສິນຄ້າ,ໂຄສະນະ
+            SizedBox(height: 10),
             CarouselSlider(
               items: slidePromotion.map((item) {
                 return Container(
@@ -48,38 +57,44 @@ class HomePage extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(item, fit: BoxFit.cover,))
-                  );
+                    child: Image.asset(item, fit: BoxFit.cover),
+                  ),
+                );
               }).toList(),
-              options: CarouselOptions(height: 180,
-              viewportFraction : 1,
-              autoPlay: true,),
+              options: CarouselOptions(
+                height: 180,
+                viewportFraction: 1,
+                autoPlayInterval: Duration(seconds: 2),
+                // autoPlay: true,
+                // autoPlayAnimationDuration: Duration(milliseconds: 200)
+              ),
             ),
-
+            SizedBox(height: 10),
             Align(
               alignment: Alignment.centerLeft,
-              child: Text("ລາຍການສິນຄ້າ",style: myTextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600
-              ),),
+              child: Text(
+                'ລາຍການສິນຄ້າ',
+                style: myTextStyle(fontWeight: FontWeight.w600),
+              ),
             ),
+            // ການສະເເດງລາຍການສິນຄ້າທີມີ Gridview
             GridView.builder(
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemCount: 30,
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount:2,
+                crossAxisCount: 2,
                 crossAxisSpacing: 10,
-                mainAxisSpacing: 10
-                ),
-                itemBuilder: (context,indwx){
-                  return Container(
-                    color: Colors.green,
-                    child: Text(""),
-                  );
-                },
-              )
+                mainAxisSpacing: 10,
+              ),
+              itemBuilder: (context, index) {
+                return Container(
+                  color: Colors.green,
+                  child: Text('index ${index}'),
+                );
+              },
+            ),
           ],
         ),
       ),
