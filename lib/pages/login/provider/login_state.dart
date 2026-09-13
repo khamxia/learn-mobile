@@ -1,17 +1,30 @@
-enum Loginstatus { initial, loading, success, error }
+import 'package:learn_app/model/sighup_model.dart';
 
-class Loginstate {
-  Loginstatus loginstatus;
-  bool isShowPassword;
+enum LoginStatus { initial, loading, success, error }
+
+class LoginState {
+  LoginStatus loginStatus;
+  bool isShowpassword;
+  SignUpModel? signUpModel;
+
   LoginState({
-    this.loginstatus = Loginstatus.initial,
-    this.isShowPassword = false,
-  })
+    this.loginStatus = LoginStatus.initial,
+    this.isShowpassword = false,
+    this.signUpModel,
+  });
 
-  factory LoginState.initial() {
+  factory LoginState.initial() =>
+      LoginState(loginStatus: LoginStatus.initial, isShowpassword: false);
+
+  LoginState copyWith({
+    LoginStatus? loginStatus,
+    bool? isShowpassword,
+    SignUpModel? signUpModel,
+  }) {
     return LoginState(
-      loginstatus: Loginstatus.initial,
-      isShowPassword: false,
+      loginStatus: loginStatus ?? this.loginStatus,
+      isShowpassword: isShowpassword ?? this.isShowpassword,
+      signUpModel: signUpModel ?? this.signUpModel,
     );
   }
 }
