@@ -1,4 +1,4 @@
-import 'package:learn_app/model/sighup_model.dart';
+import 'package:learn_app/models/signup_model.dart';
 
 enum LoginStatus { initial, loading, success, error }
 

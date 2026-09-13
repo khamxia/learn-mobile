@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {

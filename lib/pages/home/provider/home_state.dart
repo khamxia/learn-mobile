@@ -1,39 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:learn_app/models/products_model.dart';
+
+enum HomeStatus { initial, loading, success, error }
 
 class HomeState {
-  final List<Map<String, dynamic>> listProduct;
-  final String? errorMessage;
+  HomeStatus homeStatus;
+  List<ProductsModel> productList;
 
-  const HomeState({this.listProduct = const [], this.errorMessage});
+  HomeState({
+    this.homeStatus = HomeStatus.initial,
+    this.productList = const [],
+  });
+
+  factory HomeState.initial() => HomeState(homeStatus: HomeStatus.initial);
 
   HomeState copyWith({
-    List<Map<String, dynamic>>? listProduct,
-    String? errorMessage,
+    HomeStatus? homeStatus,
+    List<ProductsModel>? productList,
   }) {
     return HomeState(
-      listProduct: listProduct ?? this.listProduct,
-      errorMessage: errorMessage ?? this.errorMessage,
+      homeStatus: homeStatus ?? this.homeStatus,
+      productList: productList ?? this.productList,
     );
-  }
-}
-
-class HomeLogic extends ChangeNotifier {
-  final List<Map<String, dynamic>> products = [];
-
-  HomeState _homeState = const HomeState();
-  HomeState get homeState => _homeState;
-
-  Future<void> getData() async {
-    final List<Map<String, dynamic>> list = List<Map<String, dynamic>>.from(
-      products,
-    );
-    try {
-      await Future.delayed(const Duration(seconds: 2));
-      _homeState = homeState.copyWith(listProduct: list);
-      notifyListeners();
-    } catch (e) {
-      _homeState = homeState.copyWith(errorMessage: e.toString());
-      notifyListeners();
-    }
   }
 }

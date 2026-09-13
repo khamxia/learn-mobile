@@ -3,10 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
 import 'package:learn_app/constants/app_image.dart';
 import 'package:learn_app/constants/data_demo.dart';
+import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((call) {
+      context.read<HomeLogic>().getListProduct();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,64 +50,53 @@ class HomePage extends StatelessWidget {
               ],
             ),
             // ສະເເດງ slide ສິນຄ້າ,ໂຄສະນະ
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             CarouselSlider(
               items: slidePromotion.map((item) {
                 return Container(
+                  height: 180,
+                  width: double.infinity,
                   decoration: BoxDecoration(
                     color: AppColors.errorColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      item,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: 300,
-                    ),
+                    child: Image.asset(item, fit: BoxFit.cover),
                   ),
                 );
               }).toList(),
               options: CarouselOptions(
                 height: 180,
-                autoPlay: true,
-                viewportFraction:
-                    0.8, // ສ່ວນຂອງ slide ທີ່ຈະເລີ່ມແລ້ວ ຫຼື ການສະແດງໃນຫນ້າຈໍ
-                autoPlayAnimationDuration: Duration(seconds: 1),
+                viewportFraction: 1,
+                autoPlayInterval: Duration(seconds: 2),
+                // autoPlay: true,
+                // autoPlayAnimationDuration: Duration(milliseconds: 200)
               ),
             ),
+            SizedBox(height: 10),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Product List',
+                'ລາຍການສິນຄ້າ',
                 style: myTextStyle(fontWeight: FontWeight.w600),
               ),
             ),
-
+            // ການສະເເດງລາຍການສິນຄ້າທີມີ Gridview
             GridView.builder(
               physics: NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              itemCount: 30,
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
               ),
-              itemBuilder: (context,index) {
+              itemBuilder: (context, index) {
                 return Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Product ${index + 1}',
-                      style: myTextStyle(
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.whiteColor,
-                      ),
-                    ),
-                  ),
+                  color: Colors.green,
+                  child: Text('index ${index}'),
                 );
               },
             ),
