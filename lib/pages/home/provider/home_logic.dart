@@ -99,4 +99,5 @@ class HomeLogic extends ChangeNotifier {
     // _homeState = homeState.copyWith(cartList: []);
     notifyListeners();
   }
+ 
 }
