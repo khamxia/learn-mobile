@@ -61,11 +61,7 @@ class CartItemCard extends StatelessWidget {
                 // ຍີ່ຫໍ້ ເເລະ ຈຳນວນ
                 Row(
                   children: [
-                    Flexible(
-                      child: _Chip(
-                        label: '${product?.brand ?? product?.category}',
-                      ),
-                    ),
+                    _Chip(label: '${product?.brand ?? product?.category}'),
                     SizedBox(width: 6),
                     Text(
                       'x${item.qty}',
@@ -115,7 +111,9 @@ class CartItemCard extends StatelessWidget {
                             'ລວມ',
                             style: myTextStyle(
                               fontSize: 11,
-                              color: AppColors.textColor.withValues(alpha: 0.45),
+                              color: AppColors.textColor.withValues(
+                                alpha: 0.45,
+                              ),
                             ),
                           ),
                           Text(

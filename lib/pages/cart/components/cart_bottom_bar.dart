@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learn_app/pages/home/provider/home_logic.dart';
+import 'package:provider/provider.dart';
 import '../../../constants/app_color.dart';
 import '../../../widgets/my_text_style.dart';
 
@@ -10,7 +12,7 @@ class CartBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final logic = context.watch<HomeLogic>();
     return Container(
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
@@ -34,14 +36,14 @@ class CartBottomBar extends StatelessWidget {
           children: [
             // ລາຄາລວມກ່ອນຫັກສ່ວນຫລຸດ
             _SummaryRow(
-              label: 'ລາຄາລວມ (10 ລາຍການ)',
-              value: '20000',
+              label: 'ລາຄາລວມ (${logic.totalQty} ລາຍການ)',
+              value: '${logic.sums.toStringAsFixed(2)}',
             ),
             SizedBox(height: 6),
             // ສ່ວນຫລຸດລວມ
             _SummaryRow(
               label: 'ສ່ວນຫລຸດ',
-              value: '-\$${3.toStringAsFixed(2)}',
+              value: '-\$${logic.totalDiscount.toStringAsFixed(2)}',
               valueColor: AppColors.errorColor,
             ),
             Padding(
@@ -65,7 +67,7 @@ class CartBottomBar extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  '\$${2.toStringAsFixed(2)}',
+                  '\$${logic.total.toStringAsFixed(2)}',
                   style: myTextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w800,
@@ -115,7 +117,11 @@ class _SummaryRow extends StatelessWidget {
   final String value;
   final Color? valueColor;
 
-  const _SummaryRow({required this.label, required this.value, this.valueColor});
+  const _SummaryRow({
+    required this.label,
+    required this.value,
+    this.valueColor,
+  });
 
   @override
   Widget build(BuildContext context) {

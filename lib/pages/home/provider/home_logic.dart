@@ -80,7 +80,8 @@ class HomeLogic extends ChangeNotifier {
     //ຫາຕຳເເໜ່ງ index ຂອງສິນຄ້າທີ່ມີຢູ່ໃນກະຕ່າ,ຖ້າບໍ່ເຫັນມັນຈະໄດ້ເປັນ -1
     int indexItem = newCopyCart.indexWhere((e) => e.product?.id == id);
 
-    if (indexItem == -1)return; // ຖ້າວ່າຫາຕຳເເໜ່ງໃນ list ບໍ່ພົບເຫັນບອກໃຫ້ program ຢຸດເຮັດວຽກທັນທີ
+    if (indexItem == -1)
+      return; // ຖ້າວ່າຫາຕຳເເໜ່ງໃນ list ບໍ່ພົບເຫັນບອກໃຫ້ program ຢຸດເຮັດວຽກທັນທີ
     if (newCopyCart[indexItem].qty > 1) {
       // ກວດສອບວ່າ ຖ້າຈຳນວນໃນ index ນັ້ນໃຫ່ຍກວ່າ 1 ເເມ່ນໃຫ້ລົບ
       newCopyCart[indexItem].qty = newCopyCart[indexItem].qty - 1;
@@ -95,9 +96,40 @@ class HomeLogic extends ChangeNotifier {
 
   // ລົບກະຕ່າຖີ້ມ
   void deleteAllCart() {
-     _homeState.cartList?.clear();
+    _homeState.cartList?.clear();
     // _homeState = homeState.copyWith(cartList: []);
     notifyListeners();
   }
- 
+
+  // ຈຳນວນລາຍການ
+  int get totalQty => (_homeState.cartList ?? []).length;
+  // ລວມຈຳນວນທັງໝົດ ຫຼັງສ່ວນຫຼຸດ
+  double get totalSums => (_homeState.cartList ?? []).fold(0.0, (sum, e) {
+    return sum +
+        (((e.product?.price ?? 0) -
+            ((e.product?.price ?? 0) *
+                    ((e.product?.discountPercentage ?? 0) / 100)) *
+                (e.qty)));
+  });
+  // ລວມລາຄາທັງໝົດກ່ອນ ສ່ວນຫຼຸດ
+  double get sums => (_homeState.cartList ?? []).fold(
+    0.0,
+    (total, item) => total + (item.product?.price ?? 0) * item.qty,
+  );
+  // ຄຳນວນສ່ວນຫຼຸດ
+  double get totalDiscount => (_homeState.cartList ?? []).fold(0.0, (sum, e) {
+    return sum +
+        ((e.product?.price ?? 0) *
+                ((e.product?.discountPercentage ?? 0) / 100)) *
+            (e.qty);
+  });
+  double get total => sums - totalDiscount;
+
+  // ດຶງຈຳນວນ qty ໃນ cart ຕາມ id
+  int cartQty(int id) {
+    CartModel item = (_homeState.cartList ?? []).firstWhere(
+      (i) => id == i.product?.id,
+    );
+    return item.qty;
+  }
 }

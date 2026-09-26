@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
+import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/pages/product_details/components/add_remove_cart.dart';
 import 'package:learn_app/pages/product_details/components/bottom_navigate.dart';
 import 'package:learn_app/pages/product_details/components/product_image_slide.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/products_model.dart';
 
@@ -44,6 +46,7 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final logic = context.watch<HomeLogic>();
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       appBar: AppBar(
@@ -88,7 +91,9 @@ class ProductDetailsPage extends StatelessWidget {
                   SizedBox(height: 12),
                   _buildStock(),
                   _divider(),
-                  _buildQtySection(),
+                  _buildQtySection(
+                    cartQty: logic.cartQty(data.id ?? 0).toString(),
+                  ),
                   _divider(),
                   _buildDescription(),
                   _divider(),
@@ -266,7 +271,7 @@ class ProductDetailsPage extends StatelessWidget {
   }
 
   // ---------------- ເລືອກຈຳນວນ + ລາຄາລວມ ----------------
-  Widget _buildQtySection() {
+  Widget _buildQtySection({required String cartQty}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -278,7 +283,7 @@ class ProductDetailsPage extends StatelessWidget {
             ),
             Spacer(),
             AddRemoveCart(
-              qty: '$qty',
+              qty: '$cartQty',
               // TODO: ຂ້ອຍຈະຂຽນເອງ
               add: () {},
               remove: () {},
