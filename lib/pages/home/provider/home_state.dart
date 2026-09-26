@@ -1,13 +1,14 @@
-import 'package:learn_app/models/products_model.dart';
 
-import '../../../models/cart_model.dart';
+
+import '../../../model/cart_model.dart';
+import '../../../model/products_model.dart';
 
 enum HomeStatus { initial, loading, success, error }
 
 class HomeState {
   HomeStatus homeStatus;
   List<ProductsModel> productList;
-  List<CartModel>? cartList; // [CartModel,CartModel]
+  List<CartModel>? cartList;
 
   HomeState({
     this.homeStatus = HomeStatus.initial,

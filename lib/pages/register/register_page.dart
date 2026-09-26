@@ -106,13 +106,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _passwordController,
                   hintText: 'ປ້ອນລະຫັດຜ່ານ',
                   prefixIcon: Icons.lock,
-                  obscureText: true,
                   validator: (p) {
                     if (p == null || p.isEmpty) {
                       return 'ກະລຸນາປ້ອນລະຫັດຜ່ານ';
                     }
                     return null;
                   },
+                  obscureText: true,
                 ),
                 SizedBox(height: 20),
                 SizedBox(
@@ -126,16 +126,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        // Perform registration logic here
                         context.read<LoginLogic>().addUser(
                           id: 1,
-                          fullName: _usernameController.text,
+                          fullname: _usernameController.text,
                           email: _emailController.text,
                           password: _passwordController.text,
                         );
-                        Navigator.pop(context);
+                        Navigator.pop(context); 
+
                       }
                     },
                     child: Text(

@@ -6,7 +6,9 @@ import 'package:learn_app/pages/register/register_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/app_color.dart';
+import '../../constants/app_image.dart';
 import '../../widgets/my_text_style.dart';
+import '../dashboard/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -43,9 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Image.asset(AppImage.logo, width: 130, height: 130),
-                  ),
+                  Center(child: Image.asset(AppImage.logo, width: 100, height: 100)),
                   Center(
                     child: Text(
                       "ຍິນດີຕ້ອນຮັບ",
@@ -66,10 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(height: 40),
-                  Text(
-                    'ອີເມວ',
-                    style: myTextStyle(fontWeight: FontWeight.w600),
-                  ),
+                  Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
                   SizedBox(height: 5),
                   TextFormField(
                     controller: _emailController,
@@ -83,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: AppColors.textColor,
                           width: 0.5,
                         ),
-
+              
                         borderRadius: BorderRadius.circular(14),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -113,7 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                   Consumer<LoginLogic>(
                     builder: (context, loginState, child) {
                       final state = loginState.loginState;
-                      print('1234 => ${state.signUpModel?.email}');
+                      print('status ==>${state.loginStatus}');
+                      print('isPassword => ${state.signUpModel?.email}');
                       return TextFormField(
                         controller: _passwordController,
                         obscureText: state.isShowpassword,
@@ -198,11 +196,10 @@ class _LoginPageState extends State<LoginPage> {
                           print('ມີຂໍ້ມູນເເລ້ວ');
                           Navigator.pushAndRemoveUntil(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => DashboardPage(),
-                            ),
-                            (route) => false,
-                          );
+                           MaterialPageRoute(
+                            builder: (context) => const DashbosrdPage()
+                            ), 
+                            (route) => false);
                         }
                       },
                       child: Text(
