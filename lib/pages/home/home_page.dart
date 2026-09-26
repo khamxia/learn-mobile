@@ -1,14 +1,32 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
+import 'package:learn_app/pages/cart/cart_page.dart';
+import 'package:learn_app/pages/home/components/badges_product.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/app_image.dart';
 import '../../constants/data_demo.dart';
+import 'components/product_list.dart';
+import 'provider/home_logic.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((call) {
+      context.read<HomeLogic>().getListProduct();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,7 +51,16 @@ class HomePage extends StatelessWidget {
                 ),
                 Spacer(),
                 IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag)),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => CartPage()),
+                      );
+                  },
+                  child: BadgesProduct()
+                ),
+                
               ],
             ),
             // ສະເເດງ slide ສິນຄ້າ,ໂຄສະນະ
@@ -69,23 +96,24 @@ class HomePage extends StatelessWidget {
                 style: myTextStyle(fontWeight: FontWeight.w600)),
             ),
 
-            GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: 30,
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(  
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
-              itemBuilder:(context, index) {
-                return Container(
-                  color: Colors.green,
-                  child: Text('index: $index'),
-                );
-              },
-            )
+            // GridView.builder(
+            //   physics: NeverScrollableScrollPhysics(),
+            //   scrollDirection: Axis.vertical,
+            //   itemCount: 30,
+            //   shrinkWrap: true,
+            //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(  
+            //     crossAxisCount: 2,
+            //     mainAxisSpacing: 10,
+            //     crossAxisSpacing: 10,
+            //   ),
+            //   itemBuilder:(context, index) {
+            //     return Container(
+            //       color: Colors.green,
+            //       child: Text('index: $index'),
+            //     );
+            //   },
+            // ),
+            ProductList(),
           ],
         ),
       ),
