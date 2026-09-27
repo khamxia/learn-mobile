@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
 import 'package:learn_app/constants/app_image.dart';
 import 'package:learn_app/constants/data_demo.dart';
+import 'package:learn_app/pages/cart/cart_page.dart';
+import 'package:learn_app/pages/home/components/badges_product.dart';
+import 'package:learn_app/pages/home/components/product_list.dart';
 import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
@@ -18,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((call) {
+    WidgetsBinding.instance.addPostFrameCallback((call) {
       context.read<HomeLogic>().getListProduct();
     });
   }
@@ -46,7 +49,15 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Spacer(),
                 IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-                IconButton(onPressed: () {}, icon: Icon(Icons.shopping_bag)),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => CartPage()),
+                    );
+                  },
+                  child: BadgesProduct(),
+                ),
               ],
             ),
             // ສະເເດງ slide ສິນຄ້າ,ໂຄສະນະ
@@ -83,23 +94,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             // ການສະເເດງລາຍການສິນຄ້າທີມີ Gridview
-            GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: 30,
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-              ),
-              itemBuilder: (context, index) {
-                return Container(
-                  color: Colors.green,
-                  child: Text('index ${index}'),
-                );
-              },
-            ),
+
+            ProductList(),
           ],
         ),
       ),
