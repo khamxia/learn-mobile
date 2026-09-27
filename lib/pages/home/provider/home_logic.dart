@@ -35,7 +35,7 @@ class HomeLogic extends ChangeNotifier {
   }
 
   // ເພີ່ມເຂົ້າກະຕ່າ
-  void addToCart(int id) {
+  void addToCart(int id, {int qty = 1}) {
     // ProductsModel item = _homeState.productList[index];
     // ສຳເນົາ List ເກົ່າອອກມາສ້າງເປັນ List ໃໝ່
     List<CartModel> newCopyCart = List<CartModel>.from(
@@ -46,7 +46,7 @@ class HomeLogic extends ChangeNotifier {
     int indexItem = newCopyCart.indexWhere((e) => e.product?.id == id);
     if (indexItem != -1) {
       // ຖ້າວ່າມີເເລ້ວ ເເມ່ນໃຫ້ບວກ 1 ເຂົ້າໄປ
-      newCopyCart[indexItem].qty = newCopyCart[indexItem].qty + 1;
+      newCopyCart[indexItem].qty = newCopyCart[indexItem].qty + qty;
       print('qty ==${newCopyCart[indexItem].qty}');
     } else {
       ProductsModel item = _homeState.productList.singleWhere(
@@ -64,7 +64,7 @@ class HomeLogic extends ChangeNotifier {
       //   }
       // }
       // ຖ້າວ່າຍັງບໍ່ມີ ເເມ່ນໃຫ້ເພີ່ມເປັນລາຍການໃໝ່
-      newCopyCart.add(CartModel(qty: 1, product: item));
+      newCopyCart.add(CartModel(qty: qty, product: item));
     }
     _homeState = homeState.copyWith(cartList: newCopyCart);
     notifyListeners();
@@ -127,9 +127,40 @@ class HomeLogic extends ChangeNotifier {
 
   // ດຶງຈຳນວນ qty ໃນ cart ຕາມ id
   int cartQty(int id) {
+    // firstWhere [1,2,1,,1],
+    // lastWhere [1,2,1,,1],
     CartModel item = (_homeState.cartList ?? []).firstWhere(
       (i) => id == i.product?.id,
+      orElse: () => CartModel(qty: 0),
     );
     return item.qty;
+  }
+
+  // ດຶງຄ່າຈຳນວນໃນ ກະຕ່າ
+  int get selectedQty => _homeState.selectQty;
+  // ເພີ່ມຈຳນວນ
+  void addQty({required int max}) {
+    print('before add ${selectedQty} ==$max');
+    if (selectedQty >= max) return;
+    print('after check selected');
+    _homeState = homeState.copyWith(selectQty: selectedQty + 1);
+    notifyListeners();
+  }
+
+  // ລົບຈຳນວນ
+  void removeQty({required int min}) {
+    if (selectedQty <= min) return;
+    _homeState = homeState.copyWith(selectQty: selectedQty - 1);
+    notifyListeners();
+  }
+
+  // ເພີ່ມຈຳນວນສິນຄ້າທີ່ມີໃນ cart ມາອັບເດດ selectQty
+  void updateQtyFromCart(int productId) {
+    CartModel item = (_homeState.cartList ?? []).firstWhere(
+      (i) => productId == i.product?.id,
+      orElse: () => CartModel(qty: 0),
+    );
+    _homeState = homeState.copyWith(selectQty: item.qty);
+    notifyListeners();
   }
 }

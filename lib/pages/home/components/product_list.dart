@@ -51,6 +51,8 @@ class ProductList extends StatelessWidget {
             return GestureDetector(
               onTap: () {
                 print('index ==>${index}');
+                context.read<HomeLogic>().updateQtyFromCart(item.id ?? 0);
+                // ຕັ້ງຈຳນວນເລີ່ມຕົ້ນກ່ອນເຂົ້າໜ້າລາຍລະອຽດ
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -136,8 +138,10 @@ class ProductList extends StatelessWidget {
                               ),
                               Spacer(),
                               GestureDetector(
-                                onTap: (){
-                                  context.read<HomeLogic>().addToCart(item.id ?? 0);
+                                onTap: () {
+                                  context.read<HomeLogic>().addToCart(
+                                    item.id ?? 0,
+                                  );
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(4),

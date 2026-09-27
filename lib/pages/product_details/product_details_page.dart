@@ -48,7 +48,7 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final logic = context.watch<HomeLogic>();
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: Text(
@@ -92,7 +92,8 @@ class ProductDetailsPage extends StatelessWidget {
                   _buildStock(),
                   _divider(),
                   _buildQtySection(
-                    cartQty: logic.cartQty(data.id ?? 0).toString(),
+                    context,
+                    cartQty: logic.selectedQty.toString(),
                   ),
                   _divider(),
                   _buildDescription(),
@@ -106,7 +107,24 @@ class ProductDetailsPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigate(
         // TODO: ຂ້ອຍຈະຂຽນເອງ
-        addToCart: () {},
+        addToCart: () {
+          context.read<HomeLogic>().addToCart(
+            data.id ?? 0,
+            qty: logic.selectedQty,
+          );
+          context.read<HomeLogic>().updateQtyFromCart(data.id ?? 0);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              behavior: SnackBarBehavior.fixed,
+              duration: Duration(seconds: 2),
+              backgroundColor: AppColors.successColor,
+              content: Text(
+                'ສັ່ງຊື້ສຳເລັດ',
+                style: myTextStyle(color: AppColors.whiteColor),
+              ),
+            ),
+          );
+        },
         buyNow: () {},
       ),
     );
@@ -271,7 +289,7 @@ class ProductDetailsPage extends StatelessWidget {
   }
 
   // ---------------- ເລືອກຈຳນວນ + ລາຄາລວມ ----------------
-  Widget _buildQtySection({required String cartQty}) {
+  Widget _buildQtySection(BuildContext context, {required String cartQty}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -284,9 +302,12 @@ class ProductDetailsPage extends StatelessWidget {
             Spacer(),
             AddRemoveCart(
               qty: '$cartQty',
-              // TODO: ຂ້ອຍຈະຂຽນເອງ
-              add: () {},
-              remove: () {},
+              add: () {
+                context.read<HomeLogic>().addQty(max: 5);
+              },
+              remove: () {
+                context.read<HomeLogic>().removeQty(min: 1);
+              },
             ),
           ],
         ),
