@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../../constants/app_color.dart';
 import '../../widgets/my_text_style.dart';
+import '../dashbord/dashbord_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

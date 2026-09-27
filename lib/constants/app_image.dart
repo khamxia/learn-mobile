@@ -1,5 +1,4 @@
-
-class AppImage{
+class AppImage {
   static const String logo = 'assets/flutter_1.png';
   // barnner
   static const String banner1 = 'assets/banner1.jpg';

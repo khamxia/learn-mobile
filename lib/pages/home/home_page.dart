@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
 import 'package:learn_app/constants/app_image.dart';
 import 'package:learn_app/constants/data_demo.dart';
-import 'package:learn_app/models/products_model.dart';
 import 'package:learn_app/pages/cart/cart_page.dart';
 import 'package:learn_app/pages/home/components/badges_product.dart';
 import 'package:learn_app/pages/home/components/product_list.dart';
@@ -98,6 +97,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             // ການສະເເດງລາຍການສິນຄ້າທີມີ Gridview
+
             ProductList(),
           ],
         ),
