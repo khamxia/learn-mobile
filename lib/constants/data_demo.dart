@@ -12,7 +12,7 @@ List<String> slidePromotion = [
   AppImage.banner3
 ];
 
-List<Map<String,dynamic>>product = 
+List<Map<String,dynamic>> product = 
   [
     {
       "id": 1,

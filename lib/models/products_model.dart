@@ -9,54 +9,6 @@ List<ProductsModel> productsModelFromJson(String str) => List<ProductsModel>.fro
 String productsModelToJson(List<ProductsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class ProductsModel {
-<<<<<<< HEAD
-    final int id;
-    final String title;
-    final String description;
-    final String category;
-    final double price;
-    final double discountPercentage;
-    final double rating;
-    final int stock;
-    final List<String> tags;
-    final String brand;
-    final String sku;
-    final int weight;
-    final Dimensions dimensions;
-    final String warrantyInformation;
-    final String shippingInformation;
-    final String availabilityStatus;
-    final List<Review> reviews;
-    final String returnPolicy;
-    final int minimumOrderQuantity;
-    final Meta meta;
-    final List<String> images;
-    final String thumbnail;
-
-    ProductsModel({
-        required this.id,
-        required this.title,
-        required this.description,
-        required this.category,
-        required this.price,
-        required this.discountPercentage,
-        required this.rating,
-        required this.stock,
-        required this.tags,
-        required this.brand,
-        required this.sku,
-        required this.weight,
-        required this.dimensions,
-        required this.warrantyInformation,
-        required this.shippingInformation,
-        required this.availabilityStatus,
-        required this.reviews,
-        required this.returnPolicy,
-        required this.minimumOrderQuantity,
-        required this.meta,
-        required this.images,
-        required this.thumbnail,
-=======
     final int? id;
     final String? title;
     final String? description;
@@ -103,7 +55,6 @@ class ProductsModel {
         this.meta,
         this.images,
         this.thumbnail,
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
     });
 
     factory ProductsModel.fromJson(Map<String, dynamic> json) => ProductsModel(
@@ -115,21 +66,6 @@ class ProductsModel {
         discountPercentage: json["discountPercentage"]?.toDouble(),
         rating: json["rating"]?.toDouble(),
         stock: json["stock"],
-<<<<<<< HEAD
-        tags: List<String>.from(json["tags"].map((x) => x)),
-        brand: json["brand"],
-        sku: json["sku"],
-        weight: json["weight"],
-        dimensions: Dimensions.fromJson(json["dimensions"]),
-        warrantyInformation: json["warrantyInformation"],
-        shippingInformation: json["shippingInformation"],
-        availabilityStatus: json["availabilityStatus"],
-        reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
-        returnPolicy: json["returnPolicy"],
-        minimumOrderQuantity: json["minimumOrderQuantity"],
-        meta: Meta.fromJson(json["meta"]),
-        images: List<String>.from(json["images"].map((x) => x)),
-=======
         tags: json["tags"] == null ? [] : List<String>.from(json["tags"]!.map((x) => x)),
         brand: json["brand"],
         sku: json["sku"],
@@ -143,7 +79,6 @@ class ProductsModel {
         minimumOrderQuantity: json["minimumOrderQuantity"],
         meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
         images: json["images"] == null ? [] : List<String>.from(json["images"]!.map((x) => x)),
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
         thumbnail: json["thumbnail"],
     );
 
@@ -156,21 +91,6 @@ class ProductsModel {
         "discountPercentage": discountPercentage,
         "rating": rating,
         "stock": stock,
-<<<<<<< HEAD
-        "tags": List<dynamic>.from(tags.map((x) => x)),
-        "brand": brand,
-        "sku": sku,
-        "weight": weight,
-        "dimensions": dimensions.toJson(),
-        "warrantyInformation": warrantyInformation,
-        "shippingInformation": shippingInformation,
-        "availabilityStatus": availabilityStatus,
-        "reviews": List<dynamic>.from(reviews.map((x) => x.toJson())),
-        "returnPolicy": returnPolicy,
-        "minimumOrderQuantity": minimumOrderQuantity,
-        "meta": meta.toJson(),
-        "images": List<dynamic>.from(images.map((x) => x)),
-=======
         "tags": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
         "brand": brand,
         "sku": sku,
@@ -184,22 +104,11 @@ class ProductsModel {
         "minimumOrderQuantity": minimumOrderQuantity,
         "meta": meta?.toJson(),
         "images": images == null ? [] : List<dynamic>.from(images!.map((x) => x)),
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
         "thumbnail": thumbnail,
     };
 }
 
 class Dimensions {
-<<<<<<< HEAD
-    final double width;
-    final double height;
-    final double depth;
-
-    Dimensions({
-        required this.width,
-        required this.height,
-        required this.depth,
-=======
     final double? width;
     final double? height;
     final double? depth;
@@ -208,7 +117,6 @@ class Dimensions {
         this.width,
         this.height,
         this.depth,
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
     });
 
     factory Dimensions.fromJson(Map<String, dynamic> json) => Dimensions(
@@ -225,23 +133,6 @@ class Dimensions {
 }
 
 class Meta {
-<<<<<<< HEAD
-    final DateTime createdAt;
-    final DateTime updatedAt;
-    final String barcode;
-    final String qrCode;
-
-    Meta({
-        required this.createdAt,
-        required this.updatedAt,
-        required this.barcode,
-        required this.qrCode,
-    });
-
-    factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-=======
     final DateTime? createdAt;
     final DateTime? updatedAt;
     final String? barcode;
@@ -257,39 +148,19 @@ class Meta {
     factory Meta.fromJson(Map<String, dynamic> json) => Meta(
         createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
         barcode: json["barcode"],
         qrCode: json["qrCode"],
     );
 
     Map<String, dynamic> toJson() => {
-<<<<<<< HEAD
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-=======
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
         "barcode": barcode,
         "qrCode": qrCode,
     };
 }
 
 class Review {
-<<<<<<< HEAD
-    final int rating;
-    final String comment;
-    final DateTime date;
-    final String reviewerName;
-    final String reviewerEmail;
-
-    Review({
-        required this.rating,
-        required this.comment,
-        required this.date,
-        required this.reviewerName,
-        required this.reviewerEmail,
-=======
     final int? rating;
     final String? comment;
     final DateTime? date;
@@ -302,17 +173,12 @@ class Review {
         this.date,
         this.reviewerName,
         this.reviewerEmail,
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
     });
 
     factory Review.fromJson(Map<String, dynamic> json) => Review(
         rating: json["rating"],
         comment: json["comment"],
-<<<<<<< HEAD
-        date: DateTime.parse(json["date"]),
-=======
         date: json["date"] == null ? null : DateTime.parse(json["date"]),
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
         reviewerName: json["reviewerName"],
         reviewerEmail: json["reviewerEmail"],
     );
@@ -320,16 +186,8 @@ class Review {
     Map<String, dynamic> toJson() => {
         "rating": rating,
         "comment": comment,
-<<<<<<< HEAD
-        "date": date.toIso8601String(),
-        "reviewerName": reviewerName,
-        "reviewerEmail": reviewerEmail,
-    };
-}
-=======
         "date": date?.toIso8601String(),
         "reviewerName": reviewerName,
         "reviewerEmail": reviewerEmail,
     };
 }
->>>>>>> 2053d0bbedeb7fc6076933f1c5cee4921c6619b9
