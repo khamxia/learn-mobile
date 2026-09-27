@@ -14,8 +14,7 @@ class BadgesProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = context.watch<HomeLogic>().homeState;
     return badges.Badge(
-      badgeContent: Text('${(state.cartList ?? []).length}',
-       style: myTextStyle(color: AppColors.whiteColor)),
+      badgeContent: Text('${(state.cartList ?? []).length}', style: myTextStyle(color: AppColors.whiteColor)),
       child: Icon(Icons.shopping_cart_checkout_rounded),
     );
   }

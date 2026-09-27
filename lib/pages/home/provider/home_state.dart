@@ -1,6 +1,8 @@
 import 'package:learn_app/models/cart_model.dart';
 import 'package:learn_app/models/products_model.dart';
 
+import '../../../models/cart_model.dart';
+
 enum HomeStatus { initial, loading, success, error }
 
 class HomeState {
