@@ -18,6 +18,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<ProductsModel> cartList = [];
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('cart ==>${cartList.length}');
     return SafeArea(
       child: SingleChildScrollView(
         padding: EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 20),

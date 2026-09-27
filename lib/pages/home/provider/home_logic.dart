@@ -36,7 +36,7 @@ class HomeLogic extends ChangeNotifier {
 
   // ເພີ່ມເຂົ້າກະຕ່າ
   void addToCart(int id) {
-    // ProductsModel? item = _homeState.productList[index];
+    // ProductsModel item = _homeState.productList[index];
     // ສຳເນົາ List ເກົ່າອອກມາສ້າງເປັນ List ໃໝ່
     List<CartModel> newCopyCart = List<CartModel>.from(
       _homeState.cartList ?? [],
@@ -49,10 +49,21 @@ class HomeLogic extends ChangeNotifier {
       newCopyCart[indexItem].qty = newCopyCart[indexItem].qty + 1;
       print('qty ==${newCopyCart[indexItem].qty}');
     } else {
-      // ຖ້າວ່າຍັງບໍ່ມີ ເເມ່ນໃຫ້ເພີ່ມເປັນລາຍການໃໝ່
       ProductsModel item = _homeState.productList.singleWhere(
         (e) => e.id == id,
       );
+
+      // List<ProductsModel> items = _homeState.productList
+      //     .where((e) => e.id == id)
+      //     .toList();
+      // ProductsModel? items;
+      // for (var i = 0; i < _homeState.productList.length; i++) {
+      //   if(_homeState.productList[i].id == id){
+      //     items = _homeState.productList[i];
+      //     break;
+      //   }
+      // }
+      // ຖ້າວ່າຍັງບໍ່ມີ ເເມ່ນໃຫ້ເພີ່ມເປັນລາຍການໃໝ່
       newCopyCart.add(CartModel(qty: 1, product: item));
     }
     _homeState = homeState.copyWith(cartList: newCopyCart);
@@ -82,11 +93,43 @@ class HomeLogic extends ChangeNotifier {
     _homeState = homeState.copyWith(cartList: newCopyCart);
     notifyListeners();
   }
-  // delete cart
 
+  // ລົບກະຕ່າຖີ້ມ
   void deleteAllCart() {
     _homeState.cartList?.clear();
-
+    // _homeState = homeState.copyWith(cartList: []);
     notifyListeners();
+  }
+
+  // ຈຳນວນລາຍການ
+  int get totalQty => (_homeState.cartList ?? []).length;
+  // ລວມຈຳນວນທັງໝົດ ຫຼັງສ່ວນຫຼຸດ
+  double get totalSums => (_homeState.cartList ?? []).fold(0.0, (sum, e) {
+    return sum +
+        (((e.product?.price ?? 0) -
+            ((e.product?.price ?? 0) *
+                    ((e.product?.discountPercentage ?? 0) / 100)) *
+                (e.qty)));
+  });
+  // ລວມລາຄາທັງໝົດກ່ອນ ສ່ວນຫຼຸດ
+  double get sums => (_homeState.cartList ?? []).fold(
+    0.0,
+    (total, item) => total + (item.product?.price ?? 0) * item.qty,
+  );
+  // ຄຳນວນສ່ວນຫຼຸດ
+  double get totalDiscount => (_homeState.cartList ?? []).fold(0.0, (sum, e) {
+    return sum +
+        ((e.product?.price ?? 0) *
+                ((e.product?.discountPercentage ?? 0) / 100)) *
+            (e.qty);
+  });
+  double get total => sums - totalDiscount;
+
+  // ດຶງຈຳນວນ qty ໃນ cart ຕາມ id
+  int cartQty(int id) {
+    CartModel item = (_homeState.cartList ?? []).firstWhere(
+      (i) => id == i.product?.id,
+    );
+    return item.qty;
   }
 }
