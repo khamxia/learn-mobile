@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:learn_app/pages/login/provider/login_logic.dart';
+import 'package:learn_app/widgets/my_text_style.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/app_color.dart';
 import '../../widgets/my_text_field.dart';
 import '../../widgets/my_text_style.dart';
+import '../login/provider/login_logic.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -17,14 +18,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -47,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Form(
-          key: _formKey,
+          key: _formkey,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,21 +66,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  'ຊື່ຜູ້ໃຊ້',
-                  style: myTextStyle(fontWeight: FontWeight.w600),
-                ),
+                Text('ຊື່ຜູ້ໃຊ້', style: myTextStyle(fontWeight: FontWeight.w600)),
                 SizedBox(height: 5),
                 MyTextField(
                   controller: _usernameController,
                   hintText: 'ປ້ອນຊື່ຜູ້ໃຊ້',
                   prefixIcon: Icons.person,
-                  validator: (p) {
-                    if (p == null || p.isEmpty) {
+                  validator: (value){
+                    if(value == null || value.isEmpty){
                       return 'ກະລຸນາປ້ອນຊື່ຜູ້ໃຊ້';
                     }
                     return null;
-                  },
+                  }
                 ),
                 SizedBox(height: 10),
                 Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
@@ -89,30 +86,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _emailController,
                   hintText: 'ປ້ອນອີເມວ',
                   prefixIcon: Icons.email,
-                  validator: (p) {
-                    if (p == null || p.isEmpty) {
+                  validator: (value){
+                    if(value == null || value.isEmpty){
                       return 'ກະລຸນາປ້ອນອີເມວ';
                     }
                     return null;
-                  },
+                  }
                 ),
                 SizedBox(height: 10),
-                Text(
-                  'ລະຫັດຜ່ານ',
-                  style: myTextStyle(fontWeight: FontWeight.w600),
-                ),
+                Text('ລະຫັດຜ່ານ', style: myTextStyle(fontWeight: FontWeight.w600)),
                 SizedBox(height: 5),
                 MyTextField(
                   controller: _passwordController,
                   hintText: 'ປ້ອນລະຫັດຜ່ານ',
                   prefixIcon: Icons.lock,
                   obscureText: true,
-                  validator: (p) {
-                    if (p == null || p.isEmpty) {
+                  validator: (value){
+                    if(value == null || value.isEmpty){
                       return 'ກະລຸນາປ້ອນລະຫັດຜ່ານ';
                     }
                     return null;
-                  },
+                  }
                 ),
                 SizedBox(height: 20),
                 SizedBox(
@@ -126,12 +120,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
+                      if(_formkey.currentState!.validate()){
                         context.read<LoginLogic>().addUser(
                           id: 1,
-                          fullName: _usernameController.text,
+                          fullname: _usernameController.text,
                           email: _emailController.text,
                           password: _passwordController.text,
                         );
@@ -144,10 +137,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+                
               ],
             ),
           ),
         ),
+        
       ),
     );
   }

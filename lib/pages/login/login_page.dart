@@ -6,6 +6,7 @@ import 'package:learn_app/pages/register/register_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/app_color.dart';
+import '../../constants/app_image.dart';
 import '../../widgets/my_text_style.dart';
 
 class LoginPage extends StatefulWidget {
@@ -27,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.dispose();
     super.dispose();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     print('build UI');
@@ -44,7 +45,12 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Image.asset(AppImage.logo, width: 130, height: 130),
+                    child: Image.asset(
+                      AppImage.logo,//ເອີ້ນຈາກຄຮາສທີ້ເຮົາໄດ້ສ້າງໄວ້ຢູ່ຄອນເທັນ ແອບອິເມກ ນີ້ຄືສັ້ນ
+                      // or 'assets/flutter_1.jpeg',ນີ້ຄືຍາວ
+                      width: 120,
+                      height: 120,
+                    ),
                   ),
                   Center(
                     child: Text(
@@ -66,10 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(height: 40),
-                  Text(
-                    'ອີເມວ',
-                    style: myTextStyle(fontWeight: FontWeight.w600),
-                  ),
+                  Text('ອີເມວ', style: myTextStyle(fontWeight: FontWeight.w600)),
                   SizedBox(height: 5),
                   TextFormField(
                     controller: _emailController,
@@ -83,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: AppColors.textColor,
                           width: 0.5,
                         ),
-
+              
                         borderRadius: BorderRadius.circular(14),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -113,6 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                   Consumer<LoginLogic>(
                     builder: (context, loginState, child) {
                       final state = loginState.loginState;
+                      // print('status ==>${state.loginStatus}');
                       print('1234 => ${state.signUpModel?.email}');
                       return TextFormField(
                         controller: _passwordController,
@@ -197,17 +201,17 @@ class _LoginPageState extends State<LoginPage> {
                         if (_formKey.currentState!.validate()) {
                           print('ມີຂໍ້ມູນເເລ້ວ');
                           Navigator.pushAndRemoveUntil(
-                            context,
+                            context, 
                             MaterialPageRoute(
-                              builder: (context) => DashboardPage(),
-                            ),
-                            (route) => false,
+                              builder: (context)=> DashboardPage()
+                              ),
+                              (Route)=>false 
                           );
                         }
                       },
                       child: Text(
                         "ເຂົ້າສູ່ລະບົບ",
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: myTextStyle(fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),

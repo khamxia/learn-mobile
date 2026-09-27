@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
-import 'package:learn_app/models/products_model.dart';
 import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/pages/home/provider/home_state.dart';
-import 'package:learn_app/pages/product_details/product_details_page.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +10,6 @@ class ProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double hieght = MediaQuery.sizeOf(context).height;
     return Consumer<HomeLogic>(
       builder: (context, product, child) {
         // print('product list ==> ${product.homeState.productList}');

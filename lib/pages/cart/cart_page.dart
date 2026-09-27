@@ -3,9 +3,6 @@ import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:provider/provider.dart';
 import '../../constants/app_color.dart';
 import '../../widgets/my_text_style.dart';
-import 'components/cart_bottom_bar.dart';
-import 'components/cart_item_card.dart';
-import 'components/empty_cart.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});

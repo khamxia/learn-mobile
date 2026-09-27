@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:learn_app/constants/app_color.dart';
 import 'package:learn_app/constants/app_image.dart';
 import 'package:learn_app/constants/data_demo.dart';
-import 'package:learn_app/models/products_model.dart';
 import 'package:learn_app/pages/cart/cart_page.dart';
-import 'package:learn_app/pages/home/components/badges_product.dart';
-import 'package:learn_app/pages/home/components/product_list.dart';
 import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
 import 'package:provider/provider.dart';
+
+import '../../constants/app_image.dart';
+import '../../constants/data_demo.dart';
+import 'components/badges_product.dart';
+import 'components/product_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback((call) {
       context.read<HomeLogic>().getListProduct();
     });
+
   }
 
   @override
@@ -54,14 +57,12 @@ class _HomePageState extends State<HomePage> {
                 Spacer(),
                 IconButton(onPressed: () {}, icon: Icon(Icons.search)),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CartPage()),
-                    );
+                  onTap: (){
+                    Navigator.push(context,
+                     MaterialPageRoute(builder: (context)=> CartPage()));
                   },
-                  child: BadgesProduct(),
-                ),
+                  child: BadgesProduct()),
+
               ],
             ),
             // ສະເເດງ slide ສິນຄ້າ,ໂຄສະນະ
