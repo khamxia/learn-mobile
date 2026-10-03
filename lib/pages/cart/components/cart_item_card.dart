@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/app_color.dart';
-import '../../../models/cart_model.dart';
+import '../../../model/cart_model.dart';
 import '../../../widgets/my_text_style.dart';
 import '../../home/provider/home_logic.dart';
 import '../../product_details/components/add_remove_cart.dart';

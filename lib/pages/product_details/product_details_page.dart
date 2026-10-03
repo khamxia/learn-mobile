@@ -4,8 +4,7 @@ import 'package:learn_app/pages/product_details/components/add_remove_cart.dart'
 import 'package:learn_app/pages/product_details/components/bottom_navigate.dart';
 import 'package:learn_app/pages/product_details/components/product_image_slide.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
-
-import '../../models/products_model.dart';
+import '../../model/products_model.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final ProductsModel data;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:learn_app/pages/home/provider/home_logic.dart';
+import 'package:learn_app/pages/cart/components/cart_item_card.dart';
 import 'package:provider/provider.dart';
 import '../../constants/app_color.dart';
 import '../../widgets/my_text_style.dart';
+import '../home/provider/home_logic.dart';
 import 'components/cart_bottom_bar.dart';
-import 'components/cart_item_card.dart';
 import 'components/empty_cart.dart';
 
 class CartPage extends StatelessWidget {
