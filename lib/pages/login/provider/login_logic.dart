@@ -1,16 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
-import 'package:learn_app/models/login_model.dart';
-import 'package:learn_app/models/signup_model.dart';
->>>>>>> 977a308a12cb8889a4ad007391bb03022d434bf4
 import 'package:learn_app/pages/login/provider/login_state.dart';
 import 'package:learn_app/repository/authen_repository.dart';
 import 'package:learn_app/services/services.dart';
 import 'package:learn_app/utils/secure_storage.dart';
 
+import '../../../models/login_model.dart';
 import '../../dashboard/dashboard_page.dart';
 
 import '../../../model/signup_model.dart';
@@ -19,7 +15,7 @@ import '../../../model/signup_model.dart';
 class LoginLogic extends ChangeNotifier {
   LoginState _loginState = LoginState.initial();
 
-  AuthenRepository authenRepo = AuthenRepository(services: Services());
+  AuthenRepository authenRepo = AuthenRepository(serviceApi: Services());
   SecureStorage secureStorage = SecureStorage();
 
   LoginState get loginState => _loginState;
@@ -39,13 +35,9 @@ class LoginLogic extends ChangeNotifier {
       email: email,
       fullname: fullname,
       id: id,
-<<<<<<< HEAD
       password: password,
     );
 
-=======
-    );
->>>>>>> 977a308a12cb8889a4ad007391bb03022d434bf4
     _loginState = loginState.copyWith(signUpModel: data);
   }
 
@@ -67,7 +59,7 @@ class LoginLogic extends ChangeNotifier {
           loginStatus: LoginStatus.success,
           loginModel: loginData,
         );
-        await secureStorage.saveToken(loginData.accessToken ?? "");
+        await secureStorage.saveToken(loginData.accessToken);
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => DashboardPage()),
