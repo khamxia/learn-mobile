@@ -34,8 +34,8 @@ class HomeLogic extends ChangeNotifier {
     }
   }
   // ເພີ່ມເຂົ້າກະຕ່າ
-  void addToCart(int id) {
-    //ProductsModel item = _homeState.productList[index];
+  void addToCart(int id, {int qty = 1}) {
+    // ProductsModel item = _homeState.productList[index];
     // ສຳເນົາ List ເກົ່າອອກມາສ້າງເປັນ List ໃໝ່
     List<CartModel> newCopyCart = List<CartModel>.from(
       _homeState.cartList ?? [],
@@ -45,7 +45,7 @@ class HomeLogic extends ChangeNotifier {
     int indexItem = newCopyCart.indexWhere((e) => e.product?.id == id);
     if (indexItem != -1) {
       // ຖ້າວ່າມີເເລ້ວ ເເມ່ນໃຫ້ບວກ 1 ເຂົ້າໄປ
-      newCopyCart[indexItem].qty = newCopyCart[indexItem].qty + 1;
+      newCopyCart[indexItem].qty = newCopyCart[indexItem].qty + qty;
       print('qty ==${newCopyCart[indexItem].qty}');
     } else {
       ProductsModel item = _homeState.productList.singleWhere(
@@ -53,7 +53,7 @@ class HomeLogic extends ChangeNotifier {
       );
 
       // ຖ້າວ່າຍັງບໍ່ມີ ເເມ່ນໃຫ້ເພີ່ມເປັນລາຍການໃໝ່
-      newCopyCart.add(CartModel(qty: 1, product: item));
+      newCopyCart.add(CartModel(qty: qty, product: item));
     }
     _homeState = homeState.copyWith(cartList: newCopyCart);
     notifyListeners();
@@ -68,9 +68,10 @@ class HomeLogic extends ChangeNotifier {
     );
     //ຫາຕຳເເໜ່ງ index ຂອງສິນຄ້າທີ່ມີຢູ່ໃນກະຕ່າ,ຖ້າບໍ່ເຫັນມັນຈະໄດ້ເປັນ -1
     int indexItem = newCopyCart.indexWhere((e) => e.product?.id == id);
-    
-    if (indexItem == -1) return; // ຖ້າວ່າຫາຕຳເເໜ່ງໃນ list ບໍ່ພົບເຫັນບອກໃຫ້ program ຢຸດເຮັດວຽກທັນທີ
-    if(newCopyCart[indexItem].qty >1){
+
+    if (indexItem == -1)
+      return; // ຖ້າວ່າຫາຕຳເເໜ່ງໃນ list ບໍ່ພົບເຫັນບອກໃຫ້ program ຢຸດເຮັດວຽກທັນທີ
+    if (newCopyCart[indexItem].qty > 1) {
       // ກວດສອບວ່າ ຖ້າຈຳນວນໃນ index ນັ້ນໃຫ່ຍກວ່າ 1 ເເມ່ນໃຫ້ລົບ
       newCopyCart[indexItem].qty = newCopyCart[indexItem].qty - 1;
     }else{
@@ -85,6 +86,70 @@ class HomeLogic extends ChangeNotifier {
   //
   void deleteAllCart() {
     _homeState.cartList?.clear();
+    // _homeState = homeState.copyWith(cartList: []);
+    notifyListeners();
+  }
+
+  // ຈຳນວນລາຍການ
+  int get totalQty => (_homeState.cartList ?? []).length;
+  // ລວມຈຳນວນທັງໝົດ ຫຼັງສ່ວນຫຼຸດ
+  double get totalSums => (_homeState.cartList ?? []).fold(0.0, (sum, e) {
+    return sum +
+        (((e.product?.price ?? 0) -
+            ((e.product?.price ?? 0) *
+                    ((e.product?.discountPercentage ?? 0) / 100)) *
+                (e.qty)));
+  });
+  // ລວມລາຄາທັງໝົດກ່ອນ ສ່ວນຫຼຸດ
+  double get sums => (_homeState.cartList ?? []).fold(
+    0.0,
+    (total, item) => total + (item.product?.price ?? 0) * item.qty,
+  );
+  // ຄຳນວນສ່ວນຫຼຸດ
+  double get totalDiscount => (_homeState.cartList ?? []).fold(0.0, (sum, e) {
+    return sum +
+        ((e.product?.price ?? 0) *
+                ((e.product?.discountPercentage ?? 0) / 100)) *
+            (e.qty);
+  });
+  double get total => sums - totalDiscount;
+
+  // ດຶງຈຳນວນ qty ໃນ cart ຕາມ id
+  int cartQty(int id) {
+    // firstWhere [1,2,1,,1],
+    // lastWhere [1,2,1,,1],
+    CartModel item = (_homeState.cartList ?? []).firstWhere(
+      (i) => id == i.product?.id,
+      orElse: () => CartModel(qty: 0),
+    );
+    return item.qty;
+  }
+
+  // ດຶງຄ່າຈຳນວນໃນ ກະຕ່າ
+  int get selectedQty => _homeState.selectQty;
+  // ເພີ່ມຈຳນວນ
+  void addQty({required int max}) {
+    print('before add ${selectedQty} ==$max');
+    if (selectedQty >= max) return;
+    print('after check selected');
+    _homeState = homeState.copyWith(selectQty: selectedQty + 1);
+    notifyListeners();
+  }
+
+  // ລົບຈຳນວນ
+  void removeQty({required int min}) {
+    if (selectedQty <= min) return;
+    _homeState = homeState.copyWith(selectQty: selectedQty - 1);
+    notifyListeners();
+  }
+
+  // ເພີ່ມຈຳນວນສິນຄ້າທີ່ມີໃນ cart ມາອັບເດດ selectQty
+  void updateQtyFromCart(int productId) {
+    CartModel item = (_homeState.cartList ?? []).firstWhere(
+      (i) => productId == i.product?.id,
+      orElse: () => CartModel(qty: 0),
+    );
+    _homeState = homeState.copyWith(selectQty: item.qty);
     notifyListeners();
   }
 }

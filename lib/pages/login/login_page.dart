@@ -95,9 +95,9 @@ class _LoginPageState extends State<LoginPage> {
                       if (value == null || value.isEmpty) {
                         return 'ກະລຸນາປ້ອນອີເມວ';
                       }
-                      if (!value.contains('@')) {
-                        return 'ອີເມວບໍ່ຖືກຕ້ອງ';
-                      }
+                      // if (!value.contains('@')) {
+                      //   return 'ອີເມວບໍ່ຖືກຕ້ອງ';
+                      // }
                       return null;
                     },
                   ),
@@ -194,12 +194,11 @@ class _LoginPageState extends State<LoginPage> {
                         //   }
                         if (_formKey.currentState!.validate()) {
                           print('ມີຂໍ້ມູນເເລ້ວ');
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                           MaterialPageRoute(
-                            builder: (context) => const DashboardPage()
-                            ), 
-                            (route) => false);
+                          context.read<LoginLogic>().login(
+                            context: context,
+                            username: _emailController.text,
+                            password: _passwordController.text,
+                          );
                         }
                       },
                       child: Text(

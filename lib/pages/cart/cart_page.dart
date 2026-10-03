@@ -53,9 +53,11 @@ class CartPage extends StatelessWidget {
           ? null
           : CartBottomBar(
               onOrder: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('ສັ່ງຊື້ສຳເລັດ')),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(
+                  backgroundColor: AppColors.warningColor,
+                  content: Text('ສັ່ງຊື້ສຳເລັດ')));
               },
             ),
     );
