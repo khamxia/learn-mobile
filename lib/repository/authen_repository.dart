@@ -22,4 +22,16 @@ class AuthenRepository {
       return ResponseApi(message: e.toString(), success: false, data: null);
     }
   }
+
+  // ດຶງຂໍ້ມູນຜູ້ໃຊ້
+  Future<ResponseApi> getUser({required String token}) async {
+    try {
+      final response = await services.get(path: PathApi.user, token: token);
+      // print('response user ==>${response}');
+      return ResponseApi(message: "ດຶງຂໍ້ມູນສຳເລັດ", data: response.data);
+    } catch (e) {
+      print('user error :${e.toString()}');
+      return ResponseApi(message: e.toString(), data: null, success: false);
+    }
+  }
 }
