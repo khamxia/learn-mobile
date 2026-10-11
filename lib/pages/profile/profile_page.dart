@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_app/pages/profile/components/profile_detail.dart';
 import 'package:provider/provider.dart';
 
 import '../login/login_page.dart';
@@ -18,12 +19,12 @@ class _ProfilePageState extends State<ProfilePage> {
       child: TextButton(
         onPressed: () {
           context.read<LoginLogic>().clearToken();
-
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => LoginPage()),
             (route) => false,
           );
+          // Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileDetail()));
         },
         child: Text('ອອກຈາກລະບົບ'),
       ),

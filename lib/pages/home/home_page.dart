@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(50),
                         child: Image.network(
-                          user.loginState.userModel?.image ?? "",
+                          data?.image ?? "",
                           fit: BoxFit.cover,
                         ),
                       ),

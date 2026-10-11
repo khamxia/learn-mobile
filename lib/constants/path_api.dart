@@ -4,4 +4,6 @@ class PathApi{
 
   static const String login = '${baseUrl}user/login';
   static const String user = '${baseUrl}auth/me';
+  static const String products = '${baseUrl}products';
+  static const String updateUser = '${baseUrl}users/';
 }
