@@ -11,12 +11,16 @@ import 'package:learn_app/services/services.dart';
 import 'package:learn_app/utils/secure_storage.dart';
 import 'package:learn_app/widgets/alert_loading.dart';
 
+import '../../../models/login_model.dart';
 import '../../dashboard/dashboard_page.dart';
+
+import '../../../model/signup_model.dart';
+
 
 class LoginLogic extends ChangeNotifier {
   LoginState _loginState = LoginState.initial();
 
-  AuthenRepository authenRepo = AuthenRepository(services: Services());
+  AuthenRepository authenRepo = AuthenRepository(serviceApi: Services());
   SecureStorage secureStorage = SecureStorage();
 
   LoginState get loginState => _loginState;
@@ -28,16 +32,17 @@ class LoginLogic extends ChangeNotifier {
 
   void addUser({
     required int id,
-    required String fullName,
+    required String fullname,
     required String email,
     required String password,
-  }) {
+  }  ){
     SignUpModel data = SignUpModel(
       email: email,
-      password: password,
-      fullName: fullName,
+      fullname: fullname,
       id: id,
+      password: password,
     );
+
     _loginState = loginState.copyWith(signUpModel: data);
   }
 
@@ -151,3 +156,5 @@ class LoginLogic extends ChangeNotifier {
     }
   }
 }
+
+  

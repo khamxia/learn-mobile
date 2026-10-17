@@ -1,4 +1,6 @@
-import 'package:learn_app/models/products_model.dart';
+
+
+import '../model/products_model.dart';
 
 class CartModel {
   int qty;

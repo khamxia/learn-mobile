@@ -7,7 +7,7 @@ import 'package:learn_app/pages/product_details/components/product_image_slide.d
 import 'package:learn_app/widgets/my_text_style.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/products_model.dart';
+import '../../model/products_model.dart';
 
 class ProductDetailsPage extends StatelessWidget {
   final ProductsModel data;

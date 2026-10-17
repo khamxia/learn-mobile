@@ -1,4 +1,4 @@
-import 'package:learn_app/models/signup_model.dart';
+import '../../../model/signup_model.dart';
 
 import '../../../models/login_model.dart';
 import '../../../models/update_user_model.dart';

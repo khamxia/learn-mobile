@@ -1,0 +1,148 @@
+[33mcommit 412477dea13c235c72f2819452395bce99b3b68e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmix[m[33m)[m
+Author: mix1122 <mix4053@gmail.com>
+Date:   Sat Oct 3 09:35:55 2026 +0700
+
+    commit
+
+[33mcommit e5899fa78767dfbce0f5c1dccfe63a3f06c9bd5f[m[33m ([m[1;31morigin/mix[m[33m)[m
+Merge: 83f38b7 576adce
+Author: mix222 <llkk48256@gmail.com>
+Date:   Sat Sep 26 09:53:10 2026 +0700
+
+    Merge pull request #3 from khamxia/new-branch
+    
+    update and merge
+
+[33mcommit 576adce87758d3ad811cae39ccb00560f65ef040[m
+Merge: 9e29171 83f38b7
+Author: mix222 <llkk48256@gmail.com>
+Date:   Sat Sep 26 09:52:58 2026 +0700
+
+    Merge branch 'mix' into new-branch
+
+[33mcommit 83f38b775aac1d6f8580fb7499d714ee44f8d77a[m
+Author: mix1122 <mix4053@gmail.com>
+Date:   Sat Sep 26 09:32:43 2026 +0700
+
+    commit
+
+[33mcommit 9e291713620774bb2c47591a345808cdf4017587[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sat Sep 26 09:27:41 2026 +0700
+
+    design Cart page
+
+[33mcommit 773d5a280599d5ff8aee8c525bc4d2f3b3d35ffc[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sun Sep 20 12:34:03 2026 +0700
+
+    update badges and update function add, remove
+
+[33mcommit ca99092afd43f81cf0b7151a07822609bd8cb2b5[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sat Sep 19 13:06:29 2026 +0700
+
+    create function add to cart
+
+[33mcommit 1dcf8176f2b358611fcb2e5b0d085aa50f80cee2[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sun Sep 13 12:05:16 2026 +0700
+
+    update product list on home page
+
+[33mcommit 2261dfcf4a795dd9ecf0cec053eb5dbad028a77b[m
+Author: mix1122 <mix4053@gmail.com>
+Date:   Sun Sep 13 09:57:07 2026 +0700
+
+    fix bug
+
+[33mcommit 2053d0bbedeb7fc6076933f1c5cee4921c6619b9[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sun Sep 13 09:55:28 2026 +0700
+
+    update home logic and state
+
+[33mcommit 05671b2dcc8ed15e77632828854d8b8d3f8a7877[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sat Sep 12 14:46:40 2026 +0700
+
+    update dashboard and home page
+
+[33mcommit 13ad20aedcebb25257ba69129a13c0e813a1aa4f[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sat Sep 12 09:42:15 2026 +0700
+
+    design dashboard
+
+[33mcommit 6e5ff49317f09143a7fa742dd15001487027d793[m
+Merge: 6046462 e41b933
+Author: atuvang <100330817+khamxia@users.noreply.github.com>
+Date:   Fri Sep 11 18:50:58 2026 -0700
+
+    Merge pull request #2 from khamxia/tu-dev
+    
+    update flutter version
+
+[33mcommit e41b933a3e00a659714e8b31b60ea7a0cd507a7c[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sat Sep 12 08:48:55 2026 +0700
+
+    update flutter version
+
+[33mcommit 6046462cb9d1e7cfb360c53310a07a7356b91325[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sun Sep 6 12:25:29 2026 +0700
+
+    update function add user and debug show data when register success
+
+[33mcommit 8f7a8cda86b78f3dcaeb59321654949eb7ca2dae[m
+Merge: 9aa057d a9ae1cf
+Author: mix1122 <mix4053@gmail.com>
+Date:   Sun Sep 6 11:25:24 2026 +0700
+
+    update image
+
+[33mcommit 9aa057d9a68949c0d20361c9ad6a799b69d25e4e[m[33m ([m[1;32mmain[m[33m)[m
+Author: mix1122 <mix4053@gmail.com>
+Date:   Sun Sep 6 10:52:47 2026 +0700
+
+    update image
+
+[33mcommit a9ae1cf3d952f99a89e8f09c3ae228ccf81612c3[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sun Sep 6 10:33:48 2026 +0700
+
+    create login logic
+
+[33mcommit 523f9d28cd971842b3de9a696e6cb44eca1c85c8[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sun Sep 6 08:03:15 2026 +0700
+
+    update login and register resign
+
+[33mcommit fca3258b2916b0a5870d8fb94f33d52a8935e223[m
+Merge: 5d677d0 6343134
+Author: atuvang <100330817+khamxia@users.noreply.github.com>
+Date:   Fri Sep 4 21:12:37 2026 -0700
+
+    Merge pull request #1 from khamxia/tu-dev
+    
+    new page with login
+
+[33mcommit 6343134ddc66835d1cee340a95876564f7f8b7d1[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Sat Sep 5 11:10:59 2026 +0700
+
+    new page with login
+
+[33mcommit 5d677d0004f5a7e5dc21d083a888f624bd3823be[m[33m ([m[1;31morigin/tu-dev[m[33m)[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Mon Aug 31 09:15:56 2026 +0700
+
+    update register input
+
+[33mcommit 62b4a9152735fb9404db0b82f00410ffa8a9948b[m
+Author: tub-git <atugitlab@gmail.com>
+Date:   Mon Aug 31 09:03:19 2026 +0700
+
+    first commit

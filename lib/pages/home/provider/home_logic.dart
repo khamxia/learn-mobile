@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:learn_app/constants/data_demo.dart';
-import 'package:learn_app/models/cart_model.dart';
 import 'package:learn_app/pages/home/provider/home_state.dart';
 import 'package:learn_app/repository/product_repository.dart';
 import 'package:learn_app/services/services.dart';
 
-import '../../../models/products_model.dart';
-import '../../../utils/secure_storage.dart';
+import '../../../model/cart_model.dart';
+import '../../../model/products_model.dart';
 
 class HomeLogic extends ChangeNotifier {
   HomeState _homeState = HomeState.initial();
@@ -46,10 +45,9 @@ class HomeLogic extends ChangeNotifier {
     } catch (e) {
       print('error ==>$e');
       _homeState = homeState.copyWith(homeStatus: HomeStatus.error);
-      notifyListeners();
+       notifyListeners();
     }
   }
-
   // ເພີ່ມເຂົ້າກະຕ່າ
   void addToCart(int id, {int qty = 1}) {
     // ProductsModel item = _homeState.productList[index];
@@ -69,16 +67,6 @@ class HomeLogic extends ChangeNotifier {
         (e) => e.id == id,
       );
 
-      // List<ProductsModel> items = _homeState.productList
-      //     .where((e) => e.id == id)
-      //     .toList();
-      // ProductsModel? items;
-      // for (var i = 0; i < _homeState.productList.length; i++) {
-      //   if(_homeState.productList[i].id == id){
-      //     items = _homeState.productList[i];
-      //     break;
-      //   }
-      // }
       // ຖ້າວ່າຍັງບໍ່ມີ ເເມ່ນໃຫ້ເພີ່ມເປັນລາຍການໃໝ່
       newCopyCart.add(CartModel(qty: qty, product: item));
     }
@@ -88,7 +76,7 @@ class HomeLogic extends ChangeNotifier {
 
   // ລົບຈຳນວນອອກຈາກກະຕ່າ
   void removeCart(int id) {
-    // ProductsModel item = _homeState.productList[index];
+    //ProductsModel item = _homeState.productList[id];
     // ສຳເນົາ List ເກົ່າອອກມາສ້າງເປັນ List ໃໝ່
     List<CartModel> newCopyCart = List<CartModel>.from(
       _homeState.cartList ?? [],
@@ -101,7 +89,7 @@ class HomeLogic extends ChangeNotifier {
     if (newCopyCart[indexItem].qty > 1) {
       // ກວດສອບວ່າ ຖ້າຈຳນວນໃນ index ນັ້ນໃຫ່ຍກວ່າ 1 ເເມ່ນໃຫ້ລົບ
       newCopyCart[indexItem].qty = newCopyCart[indexItem].qty - 1;
-    } else {
+    }else{
       // ຖ້າຈຳນວນນ້ອຍກວ່າ 1 ເເມ່ນໃຫ້ລົບອອກຈາກ list ເລີຍ
       newCopyCart.removeAt(indexItem);
     }
@@ -110,7 +98,7 @@ class HomeLogic extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ລົບກະຕ່າຖີ້ມ
+  //
   void deleteAllCart() {
     _homeState.cartList?.clear();
     // _homeState = homeState.copyWith(cartList: []);
@@ -180,3 +168,4 @@ class HomeLogic extends ChangeNotifier {
     notifyListeners();
   }
 }
+

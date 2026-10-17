@@ -9,26 +9,26 @@ LoginModel loginModelFromJson(String str) => LoginModel.fromJson(json.decode(str
 String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
-    final String? accessToken;
-    final String? refreshToken;
-    final int? id;
-    final String? username;
-    final String? email;
-    final String? firstName;
-    final String? lastName;
-    final String? gender;
-    final String? image;
+    final String accessToken;
+    final String refreshToken;
+    final int id;
+    final String username;
+    final String email;
+    final String firstName;
+    final String lastName;
+    final String gender;
+    final String image;
 
     LoginModel({
-        this.accessToken,
-        this.refreshToken,
-        this.id,
-        this.username,
-        this.email,
-        this.firstName,
-        this.lastName,
-        this.gender,
-        this.image,
+        required this.accessToken,
+        required this.refreshToken,
+        required this.id,
+        required this.username,
+        required this.email,
+        required this.firstName,
+        required this.lastName,
+        required this.gender,
+        required this.image,
     });
 
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
