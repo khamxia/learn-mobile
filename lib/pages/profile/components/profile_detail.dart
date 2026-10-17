@@ -56,7 +56,7 @@ class ProfileDetail extends StatelessWidget {
                 SizedBox(height: 40),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 12),
-                  decoration: BoxDecoration(color: AppColors.whiteColor),
+                  // decoration: BoxDecoration(color: AppColors.whiteColor),
                   child: Column(
                     children: [
                       TitleList(
@@ -96,10 +96,10 @@ class ProfileDetail extends StatelessWidget {
               ),
             ),
             onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => UpdateProfile()),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UpdateProfile()),
+              );
             },
             child: Text(
               'ເເກ້ໄຂຂໍ້ມູນສ່ວນຕົວ',

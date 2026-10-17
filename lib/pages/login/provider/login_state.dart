@@ -1,6 +1,7 @@
 import 'package:learn_app/models/signup_model.dart';
 
 import '../../../models/login_model.dart';
+import '../../../models/update_user_model.dart';
 import '../../../models/user_model.dart';
 
 enum LoginStatus { initial, loading, success, error }
@@ -12,7 +13,7 @@ class LoginState {
   SignUpModel? signUpModel;
   LoginModel? loginModel;
   UserModel? userModel;
-
+  UpdateUserModel? updateUserModel;
 
   LoginState({
     this.loginStatus = LoginStatus.initial,
@@ -21,6 +22,7 @@ class LoginState {
     this.signUpModel,
     this.loginModel,
     this.userModel,
+    this.updateUserModel,
   });
 
   factory LoginState.initial() => LoginState(
@@ -36,6 +38,7 @@ class LoginState {
     SignUpModel? signUpModel,
     LoginModel? loginModel,
     UserModel? userModel,
+    UpdateUserModel? updateUserModel,
   }) {
     return LoginState(
       loginStatus: loginStatus ?? this.loginStatus,
@@ -44,6 +47,7 @@ class LoginState {
       signUpModel: signUpModel ?? this.signUpModel,
       loginModel: loginModel ?? this.loginModel,
       userModel: userModel ?? this.userModel,
+      updateUserModel: updateUserModel ?? this.updateUserModel,
     );
   }
 }

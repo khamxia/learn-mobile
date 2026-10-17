@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:learn_app/models/login_model.dart';
 import 'package:learn_app/models/signup_model.dart';
+import 'package:learn_app/models/update_user_model.dart';
 import 'package:learn_app/models/user_model.dart';
 import 'package:learn_app/pages/login/provider/login_state.dart';
 import 'package:learn_app/repository/authen_repository.dart';
@@ -91,7 +92,7 @@ class LoginLogic extends ChangeNotifier {
         final result = await authenRepo.getUser(token: token);
         if (result.success == true) {
           final user = userModelFromJson(jsonEncode(result.data));
-          print('map data to model ==$user');
+          // print('map data to model ==$user');
           _loginState = loginState.copyWith(
             userModel: user,
             loginStatus: LoginStatus.success,
@@ -115,5 +116,38 @@ class LoginLogic extends ChangeNotifier {
   // clear token
   Future<void> clearToken() async {
     await secureStorage.clearToken();
+  }
+
+  // ອັບເດດຂໍ້ມູນຜູ້ໃຊ້ລະບົບ
+  Future<void> updateUser(
+    BuildContext context, {
+    required String firstName,
+    required String lastName,
+    required int age,
+  }) async {
+    alertLoading(context, message: 'ກຳລັງເຂົ້າສູ່ລະບົບ...');
+    try {
+      final String? token = await getToken();
+      final result = await authenRepo.updateUser(
+        userId: loginState.userModel?.id.toString() ?? "",
+        token: token ?? "",
+        firstName: firstName,
+        lastName: lastName,
+        age: age,
+      );
+      if (result.success == true) {
+        final user = updateUserModelFromJson(jsonEncode(result.data));
+        _loginState = loginState.copyWith(updateUserModel: user);
+        Navigator.pop(context);
+        Navigator.pop(context);
+      } else {
+        Navigator.pop(context);
+      }
+      notifyListeners();
+    } catch (e) {
+      print('error ===> $e');
+      Navigator.pop(context);
+      notifyListeners();
+    }
   }
 }
