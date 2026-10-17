@@ -23,6 +23,25 @@ class _LoginPageState extends State<LoginPage> {
   // bool _isShowPassword = false;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((call) {
+      getUsernamePassword();
+    });
+  }
+
+  Future<void> getUsernamePassword() async {
+    await context.read<LoginLogic>().readUsernamePassword();
+    final String? username = context.read<LoginLogic>().loginState.username;
+    final String? password = context.read<LoginLogic>().loginState.password;
+    print('-----${username} ${password}');
+    if (username != null && password != null) {
+      _emailController.text = username;
+      _passwordController.text = password;
+    }
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -31,7 +50,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('build UI');
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       behavior: HitTestBehavior.opaque,
@@ -172,9 +190,21 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [Text('ລືມລະຫັດຜ່ານ?', style: myTextStyle())],
+                  Consumer<LoginLogic>(
+                    builder: (context, state, child) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Checkbox(
+                            value: state.loginState.remember ?? false,
+                            onChanged: (v) {
+                              context.read<LoginLogic>().rememberMe();
+                            },
+                          ),
+                          Text('ລືມລະຫັດຜ່ານ?', style: myTextStyle()),
+                        ],
+                      );
+                    },
                   ),
                   SizedBox(height: 20),
                   SizedBox(

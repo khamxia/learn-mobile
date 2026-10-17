@@ -71,7 +71,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     side: BorderSide(width: 1, color: AppColors.primaryColor),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<LoginLogic>().clearToken();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      (route) => false,
+                    );
+                  },
                   child: Text('ອອກຈາກລະບົບ'),
                 ),
               ),

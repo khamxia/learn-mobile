@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
   Future<void> checkToken() async {
     final String? token = await context.read<LoginLogic>().getToken();
     if (token != null) {
-     await context.read<LoginLogic>().getUser();
+     await context.read<LoginLogic>().getUser(context);
     }
     Navigator.pushAndRemoveUntil(
       context,

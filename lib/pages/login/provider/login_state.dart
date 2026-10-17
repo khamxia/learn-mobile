@@ -14,6 +14,9 @@ class LoginState {
   LoginModel? loginModel;
   UserModel? userModel;
   UpdateUserModel? updateUserModel;
+  String? username;
+  String? password;
+  bool remember;
 
   LoginState({
     this.loginStatus = LoginStatus.initial,
@@ -23,6 +26,9 @@ class LoginState {
     this.loginModel,
     this.userModel,
     this.updateUserModel,
+    this.username,
+    this.password,
+    this.remember = false,
   });
 
   factory LoginState.initial() => LoginState(
@@ -39,6 +45,9 @@ class LoginState {
     LoginModel? loginModel,
     UserModel? userModel,
     UpdateUserModel? updateUserModel,
+    String? username,
+    String? password,
+    bool? remember,
   }) {
     return LoginState(
       loginStatus: loginStatus ?? this.loginStatus,
@@ -48,6 +57,9 @@ class LoginState {
       loginModel: loginModel ?? this.loginModel,
       userModel: userModel ?? this.userModel,
       updateUserModel: updateUserModel ?? this.updateUserModel,
+      username: username ?? this.username,
+      password: password ?? this.password,
+      remember: remember ?? this.remember,
     );
   }
 }

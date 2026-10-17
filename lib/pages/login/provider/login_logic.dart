@@ -5,6 +5,7 @@ import 'package:learn_app/models/login_model.dart';
 import 'package:learn_app/models/signup_model.dart';
 import 'package:learn_app/models/update_user_model.dart';
 import 'package:learn_app/models/user_model.dart';
+import 'package:learn_app/pages/login/login_page.dart';
 import 'package:learn_app/pages/login/provider/login_state.dart';
 import 'package:learn_app/repository/authen_repository.dart';
 import 'package:learn_app/services/services.dart';
@@ -60,8 +61,12 @@ class LoginLogic extends ChangeNotifier {
           loginStatus: LoginStatus.success,
           loginModel: loginData,
         );
+       if(_loginState.remember == true){
+         await secureStorage.saveUsername(username);
+        await secureStorage.savePassword(password);
+       }
         await secureStorage.saveToken(loginData.accessToken ?? "");
-        await getUser();
+        await getUser(context);
         Navigator.pop(context);
         Navigator.pushAndRemoveUntil(
           context,
@@ -84,7 +89,7 @@ class LoginLogic extends ChangeNotifier {
   }
 
   // ດຶງຂໍ້ມູນຜູ້ໃຊ້
-  Future<void> getUser() async {
+  Future<void> getUser(BuildContext context) async {
     _loginState = loginState.copyWith(userStatus: LoginStatus.loading);
     try {
       final String? token = await getToken();
@@ -99,6 +104,11 @@ class LoginLogic extends ChangeNotifier {
           );
         } else {
           _loginState = loginState.copyWith(userStatus: LoginStatus.error);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+            (route) => false,
+          );
         }
       }
       notifyListeners();
@@ -149,5 +159,29 @@ class LoginLogic extends ChangeNotifier {
       Navigator.pop(context);
       notifyListeners();
     }
+  }
+
+  Future<void> readUsernamePassword() async {
+    try {
+      final String? username = await secureStorage.readUsername();
+    final String? password = await secureStorage.readPassword();
+    final String? remember = await secureStorage.readRemember();
+    print('user name ==$username $password');
+    _loginState = loginState.copyWith(
+      username: username,
+      password: password,
+      remember: bool.tryParse(remember ?? "false"),
+    );
+    print('login ==>${_loginState.username}');
+    notifyListeners();
+    } catch (e) {
+      print('errr= $e');
+    }
+  }
+
+  void rememberMe() {
+    print('remeber = ${!_loginState.remember}');
+    _loginState = loginState.copyWith(remember: !_loginState.remember);
+    notifyListeners();
   }
 }
