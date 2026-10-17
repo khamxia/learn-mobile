@@ -2,12 +2,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:learn_app/constants/data_demo.dart';
 import 'package:learn_app/pages/home/provider/home_state.dart';
+import 'package:learn_app/repository/product_repository.dart';
+import 'package:learn_app/services/services.dart';
 
 import '../../../model/cart_model.dart';
 import '../../../model/products_model.dart';
 
 class HomeLogic extends ChangeNotifier {
   HomeState _homeState = HomeState.initial();
+
+  final ProductRepository _productRepository = ProductRepository(
+    services: Services(),
+  );
+  final SecureStorage secureStorage = SecureStorage();
 
   HomeState get homeState => _homeState;
   // ຮູບເເບບການໃຊ້ function
@@ -16,16 +23,24 @@ class HomeLogic extends ChangeNotifier {
 
   Future<void> getListProduct() async {
     _homeState = homeState.copyWith(homeStatus: HomeStatus.loading);
-    List<Map<String, dynamic>> list = products;
+    // List<Map<String, dynamic>> list = products;
     try {
+      final String? token = await secureStorage.readToken();
+      // final String? token = await SecureStorage().readToken();
+      final result = await _productRepository.getProducts(token: token ?? "");
       // jsonEncode ເເມ່ນການເເປງຂໍ້ມູນໃຫ້ເປັນ String
       // jsonDecode ເເມ່ນການເເປງຂໍ້ມູນໃຫ້ເປັນ Map
-      List<ProductsModel> product = productsModelFromJson(jsonEncode(list));
-      _homeState = homeState.copyWith(
-        productList: product,
-        homeStatus: HomeStatus.success,
-      );
-      print('product list ${product.length}');
+      if (result.success == true) {
+        List<ProductsModel> product = productsModelFromJson(
+          jsonEncode(result.data['products']),
+        );
+        _homeState = homeState.copyWith(
+          productList: product,
+          homeStatus: HomeStatus.success,
+        );
+      } else {
+        _homeState = homeState.copyWith(homeStatus: HomeStatus.error);
+      }
       notifyListeners();
     } catch (e) {
       print('error ==>$e');

@@ -6,7 +6,7 @@ import 'package:learn_app/pages/register/register_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/app_color.dart';
-import '../../constants/app_image.dart';
+import '../../widgets/alert_loading.dart';
 import '../../widgets/my_text_style.dart';
 import '../dashboard/dashboard_page.dart';
 
@@ -193,7 +193,6 @@ class _LoginPageState extends State<LoginPage> {
                         //     print('ມີຂໍ້ມູນເເລ້ວ');
                         //   }
                         if (_formKey.currentState!.validate()) {
-                          print('ມີຂໍ້ມູນເເລ້ວ');
                           context.read<LoginLogic>().login(
                             context: context,
                             username: _emailController.text,

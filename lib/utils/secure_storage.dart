@@ -14,4 +14,9 @@ class SecureStorage {
     return token;
   }
 
+  // ລົບ token ອອກຈາກລະບົບ
+  Future<void> clearToken() async{
+    return await storage.delete(key: _token);
+    // return await storage.deleteAll();
+  }
 }
