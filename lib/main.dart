@@ -3,6 +3,7 @@ import 'package:learn_app/pages/dashboard/dashboard_page.dart';
 import 'package:learn_app/pages/home/provider/home_logic.dart';
 import 'package:learn_app/pages/login/login_page.dart';
 import 'package:learn_app/pages/login/provider/login_logic.dart';
+import 'package:learn_app/pages/order/provider/order_logic.dart';
 import 'package:learn_app/pages/splash/splash_page.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => HomeLogic()),
         ChangeNotifierProvider(create: (context) => LoginLogic()),
+        ChangeNotifierProvider(create: (context) => OrderLogic()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

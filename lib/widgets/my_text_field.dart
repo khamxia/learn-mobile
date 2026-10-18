@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../constants/app_color.dart';
 
 class MyTextField extends StatelessWidget {
@@ -8,6 +9,8 @@ class MyTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
+  final int? maxLine;
+  final List<TextInputFormatter>? inputFormatters;
 
   const MyTextField({
     super.key,
@@ -17,6 +20,8 @@ class MyTextField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType,
     this.validator,
+    this.maxLine,
+    this.inputFormatters,
   });
 
   @override
@@ -25,6 +30,8 @@ class MyTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       cursorColor: AppColors.primaryColor,
+      maxLines: maxLine,
+       inputFormatters: inputFormatters,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
