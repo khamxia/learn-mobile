@@ -26,9 +26,9 @@ class NotificationService {
     const initSettings = InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(
-        requestAlertPermission: false,
-        requestBadgePermission: false,
-        requestSoundPermission: false,
+        requestAlertPermission: true,
+        requestBadgePermission: true,
+        requestSoundPermission: true,
       ),
     );
 
@@ -86,7 +86,7 @@ class NotificationService {
   // Called only when app is in foreground
   static Future<void> _handleForegroundMessage(RemoteMessage message) async {
     print('[FCM] foreground message: title=${message.notification?.title}  body=${message.notification?.body}');
-    await _showLocalNotification(
+    await showLocalNotification(
       title: message.notification?.title ?? 'New Notification',
       body: message.notification?.body ?? '',
       data: message.data,
@@ -94,7 +94,7 @@ class NotificationService {
     onNewNotification?.call();
   }
 
-  static Future<void> _showLocalNotification({
+  static Future<void> showLocalNotification({
     required String title,
     required String body,
     Map<String, dynamic>? data,

@@ -4,6 +4,7 @@ import 'package:learn_app/pages/profile/components/profile_detail.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
 import 'package:provider/provider.dart';
 
+import '../../services/notification_service.dart';
 import '../login/login_page.dart';
 import '../login/provider/login_logic.dart';
 
@@ -59,6 +60,25 @@ class _ProfilePageState extends State<ProfilePage> {
                     );
                   },
                   child: Text('ຂໍ້ມູນສ່ວນຕົວ'),
+                ),
+              ),
+              SizedBox(height: 6),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    side: BorderSide(width: 1, color: AppColors.primaryColor),
+                  ),
+                  onPressed: () {
+                    NotificationService.showLocalNotification(
+                      title: "ສະບາຍດີ",
+                      body: "ສະບາຍດີວັນອາທິດ",
+                    );
+                  },
+                  child: Text('ທົດສອບການເເຈ້ງເຕືອນ'),
                 ),
               ),
               SizedBox(height: 6),
