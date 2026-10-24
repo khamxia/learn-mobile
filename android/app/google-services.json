@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "882196306807",
+    "project_id": "learn-app-bcfe7",
+    "storage_bucket": "learn-app-bcfe7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882196306807:android:4a90be9218917c26809f72",
+        "android_client_info": {
+          "package_name": "com.learn_app.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM4Qy8V342Hw_AGDb2j8vAKIp-u-H3heo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
