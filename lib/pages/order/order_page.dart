@@ -5,11 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:learn_app/constants/app_color.dart';
 import 'package:learn_app/pages/order/provider/order_logic.dart';
+import 'package:learn_app/utils/date_picker.dart';
 import 'package:learn_app/utils/modal_sheet.dart';
 import 'package:learn_app/widgets/my_text_field.dart';
 import 'package:learn_app/widgets/my_text_style.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/date_format.dart';
 import '../../utils/my_image_picker.dart';
 import '../../utils/price_format.dart';
 
@@ -26,6 +28,7 @@ class _OrderPageState extends State<OrderPage> {
   final TextEditingController _percentControll = TextEditingController();
   final TextEditingController _priceControll = TextEditingController();
   final TextEditingController _stokeControll = TextEditingController();
+  final TextEditingController _dateControll = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   File? file;
@@ -36,6 +39,17 @@ class _OrderPageState extends State<OrderPage> {
     "Chic Cosmetics",
     "Nail Couture",
   ];
+
+  @override
+  void dispose() {
+    super.dispose();
+    _titleControll.dispose();
+    _percentControll.dispose();
+    _priceControll.dispose();
+    _desControll.dispose();
+    _stokeControll.dispose();
+    _dateControll.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,6 +128,42 @@ class _OrderPageState extends State<OrderPage> {
               validator: (v) {
                 if (v!.isEmpty) {
                   return "ກະລຸນາປ້ອນສ່ວນຫຼຸດ";
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 10),
+            Text(
+              'ວັນທີເພີ່ມສິນຄ້າ',
+              style: myTextStyle(fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 4),
+            MyTextField(
+              controller: _dateControll,
+              readOnly: true,
+              hintText: 'ເລືອກວັນທີ...',
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                PriceInputFormatter(),
+              ],
+              onTap: () async {
+                print('onTap');
+                final DateTime? date = await myDatePicker(
+                  context,
+                  firstDate: DateTime(1990),
+                  lastDate: DateTime(2050),
+                );
+                if (date != null) {
+                  final String? convertDate = DateFormatter.dateFormatter(date);
+                  if (convertDate != null) {
+                    _dateControll.text = convertDate;
+                  }
+                }
+              },
+              validator: (v) {
+                if (v!.isEmpty) {
+                  return "ກະລຸນາເລືອກວັນທີກ່ອນ";
                 }
                 return null;
               },

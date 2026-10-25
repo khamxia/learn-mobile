@@ -11,6 +11,8 @@ class MyTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final int? maxLine;
   final List<TextInputFormatter>? inputFormatters;
+  final bool? readOnly;
+  final Function()? onTap;
 
   const MyTextField({
     super.key,
@@ -22,6 +24,8 @@ class MyTextField extends StatelessWidget {
     this.validator,
     this.maxLine,
     this.inputFormatters,
+    this.readOnly = false,
+    this.onTap,
   });
 
   @override
@@ -29,9 +33,11 @@ class MyTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
+      readOnly: readOnly ?? false,
+      onTap: onTap,
       cursorColor: AppColors.primaryColor,
       maxLines: maxLine,
-       inputFormatters: inputFormatters,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,

@@ -23,7 +23,11 @@ Future<void> main() async {
     print('firebase initial complete');
   });
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await NotificationService.initialize();
+  try {
+    await NotificationService.initialize();
+  } catch (e) {
+    print('NotificationService initialize error: $e');
+  }
   runApp(const MyApp());
 }
 
@@ -44,6 +48,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+          fontFamily: "NotoSansLao",
         ),
         home: SplashPage(),
         // home: DashboardPage(),
